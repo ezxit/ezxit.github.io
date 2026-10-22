@@ -1,0 +1,114 @@
+[
+  {
+    "file": "volta.jpg",
+    "title": "File:Alessandro Volta.jpeg",
+    "description": "Alessandro Volta portrait",
+    "source": "https://commons.wikimedia.org/wiki/File:Alessandro_Volta.jpeg",
+    "download_url": "https://upload.wikimedia.org/wikipedia/commons/5/52/Alessandro_Volta.jpeg",
+    "author": "",
+    "license": "Public domain",
+    "license_url": "",
+    "credit": "https://www.anthroposophie.net/bibliothek/nawi/physik/volta/bib_volta.htm",
+    "bytes": 33602,
+    "dimensions": [
+      390,
+      480
+    ]
+  },
+  {
+    "file": "voltaic-pile.png",
+    "title": "File:Voltaic pile.svg",
+    "description": "Voltaic pile diagram",
+    "source": "https://commons.wikimedia.org/wiki/File:Voltaic_pile.svg",
+    "download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/06/Voltaic_pile.svg/1280px-Voltaic_pile.svg.png",
+    "author": "Borbrav, svg version by Luigi Chiesa",
+    "license": "CC BY-SA 3.0",
+    "license_url": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "credit": "Image:Voltaic pile.png",
+    "bytes": 39784,
+    "dimensions": [
+      1100,
+      901
+    ]
+  },
+  {
+    "file": "faraday.jpg",
+    "title": "File:Michael Faraday sitting crop.jpg",
+    "description": "Michael Faraday portrait",
+    "source": "https://commons.wikimedia.org/wiki/File:Michael_Faraday_sitting_crop.jpg",
+    "download_url": "https://upload.wikimedia.org/wikipedia/commons/7/7e/Michael_Faraday_sitting_crop.jpg",
+    "author": "Unknown authorUnknown author",
+    "license": "Public domain",
+    "license_url": "",
+    "credit": "[1]",
+    "bytes": 135880,
+    "dimensions": [
+      832,
+      1100
+    ]
+  },
+  {
+    "file": "faraday-disk.jpg",
+    "title": "File:Faraday disk generator.jpg",
+    "description": "Faraday disk generator historical diagram",
+    "source": "https://commons.wikimedia.org/wiki/File:Faraday_disk_generator.jpg",
+    "download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/19/Faraday_disk_generator.jpg/1280px-Faraday_disk_generator.jpg",
+    "author": "Émile Alglave",
+    "license": "Public domain",
+    "license_url": "",
+    "credit": "Downloaded from Émile Alglave & J. Boulard (1884) The Electric Light: Its History, Production, and Applications, translated by T. O'Conor Sloan, D. Appleton & Co., New York, p.224, fig.142 on Google Books",
+    "bytes": 279501,
+    "dimensions": [
+      1100,
+      859
+    ]
+  },
+  {
+    "file": "generator.jpg",
+    "title": "File:Modern Steam Turbine Generator.jpg",
+    "description": "Modern steam turbine electric generator",
+    "source": "https://commons.wikimedia.org/wiki/File:Modern_Steam_Turbine_Generator.jpg",
+    "download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4f/Modern_Steam_Turbine_Generator.jpg/1280px-Modern_Steam_Turbine_Generator.jpg",
+    "author": "NRC",
+    "license": "Public domain",
+    "license_url": "",
+    "credit": "http://www.nrc.gov/images/reading-rm/photo-gallery/20071115-058.jpg",
+    "bytes": 174123,
+    "dimensions": [
+      1100,
+      733
+    ]
+  },
+  {
+    "file": "phone-charging.jpg",
+    "title": "File:Inductive charging of LG smartphone (2).jpg",
+    "description": "LG smartphone inductive charging, product photograph",
+    "source": "https://commons.wikimedia.org/wiki/File:Inductive_charging_of_LG_smartphone_(2).jpg",
+    "download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5c/Inductive_charging_of_LG_smartphone_%282%29.jpg/1280px-Inductive_charging_of_LG_smartphone_%282%29.jpg",
+    "author": "LG전자",
+    "license": "CC BY 2.0",
+    "license_url": "https://creativecommons.org/licenses/by/2.0",
+    "credit": "LG전자, 무선충전 기술 국제표준화 주도",
+    "bytes": 165324,
+    "dimensions": [
+      889,
+      1100
+    ]
+  },
+  {
+    "file": "faraday-ring.jpg",
+    "title": "File:Faraday ring transformer.jpg",
+    "description": "Faraday 1831 induction ring, preserved museum apparatus, photograph published 1922",
+    "source": "https://commons.wikimedia.org/wiki/File:Faraday_ring_transformer.jpg",
+    "download_url": "https://upload.wikimedia.org/wikipedia/commons/4/40/Faraday_ring_transformer.jpg",
+    "author": "Unknown authorUnknown author",
+    "license": "Public domain",
+    "license_url": "",
+    "credit": "Downloaded 3 October 2013 from \"Faraday Medal\", Proc. of the Institution of Electrical Engineers (E. and F. N. Spon, London),  Vol. 60, No. 308, April 1922,  Plate XIV, facing p. 499  on Google Books",
+    "bytes": 45815,
+    "dimensions": [
+      553,
+      536
+    ]
+  }
+]
