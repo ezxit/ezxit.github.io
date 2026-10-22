@@ -8,6 +8,7 @@ async (page) => {
   const layouts = [];
   const fullscreen = [];
   const fontReport = { css: null, samples: [] };
+  let faviconReport;
   let fontSession;
   const chromeState = () => page.evaluate(() => ['.app-head', '.control-bar', '.bottom-progress'].map(selector => {
     const node = document.querySelector(selector);
@@ -31,6 +32,21 @@ async (page) => {
       await Promise.all([...document.images].map(image => image.decode().catch(() => {})));
       document.activeElement?.blur();
     });
+    faviconReport = await page.evaluate(() => {
+      const icons = [...document.querySelectorAll('head link[rel~="icon"]')].map(link => ({
+        type: link.type,
+        sizes: link.getAttribute('sizes'),
+        href: link.getAttribute('href') || ''
+      }));
+      return {
+        noPageLogo: document.querySelector('.site-logo') === null,
+        headerOnlyActions: document.querySelector('.app-head')?.children.length === 1 && document.querySelector('.app-head')?.firstElementChild?.classList.contains('head-actions'),
+        png32: icons.some(icon => icon.type === 'image/png' && icon.sizes === '32x32' && /^data:image\/png(?:;[^,]*)?,.+/i.test(icon.href)),
+        ico: icons.some(icon => /^data:image\/(?:x-icon|vnd\.microsoft\.icon)(?:;[^,]*)?,.+/i.test(icon.href)),
+        appleTouchHref: document.querySelector('head link[rel="apple-touch-icon"]')?.getAttribute('href')
+      };
+    });
+    assert(faviconReport.noPageLogo && faviconReport.headerOnlyActions && faviconReport.png32 && faviconReport.ico && faviconReport.appleTouchHref === './apple-touch-icon.png', 'Favicon metadata or header contents are incorrect', faviconReport);
     fontReport.css = await page.evaluate(() => {
       const family = 'Electricity CJK Light';
       const faces = [...document.styleSheets].flatMap(sheet => [...sheet.cssRules])
@@ -181,7 +197,7 @@ async (page) => {
     await page.screenshot({ path: 'output/playwright/final-cover.png', scale: 'css', animations: 'disabled' });
     await page.pdf({ path: 'output/playwright/print-check.pdf', printBackground: true, preferCSSPageSize: true });
     assert(errors.length === 0, 'Browser runtime errors', errors);
-    const result = { errors, layouts, stripped, fullscreen, fontReport, sources: true, allImagesLoaded: stripped.allImagesLoaded };
+    const result = { errors, layouts, stripped, fullscreen, fontReport, faviconReport, sources: true, allImagesLoaded: stripped.allImagesLoaded };
     await page.evaluate(value => { window.qaFinalReport = value; }, result);
     return result;
   } finally {

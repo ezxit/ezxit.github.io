@@ -28,6 +28,8 @@ py -3 build.py
 
 中文使用 Adobe 思源宋體繁體版 Light（字重 300），包含於單文件 HTML，離線演示也有相同字形。英文、年份與頁碼保留原字體，中文停用瀏覽器合成粗體。字體依 SIL Open Font License 1.1 使用，完整許可隨 HTML 內嵌，並另存於 `dist/project/FONT-LICENSE.txt`。
 
+瀏覽器 favicon 採用工作區 `a-logo/` 提供的圖片，原檔複製於 `assets/branding/`。PNG 與 ICO 圖示內嵌於 HTML；手機加入主畫面的圖示另存於 `dist/project/apple-touch-icon.png`。網頁正文與頁頭不放置 logo。
+
 新增文字時，先安裝開發用的 `fonttools` 與 `brotli`，執行 `py -3 assets/fonts/subset_font.py` 更新字體子集，再執行構建。官方原始字體、來源紀錄及重建方式位於 `assets/fonts/`，一般構建不需要安裝字體工具。
 
 ## 目錄
