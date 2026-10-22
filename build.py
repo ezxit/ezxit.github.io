@@ -6,7 +6,7 @@ import re
 
 ROOT = Path(__file__).resolve().parent
 DIST = ROOT / 'dist'
-OUT = DIST / 'project'
+OUT = DIST
 OUT.mkdir(parents=True, exist_ok=True)
 template = (ROOT / 'deck.template.html').read_text(encoding='utf-8')
 manifest = json.loads((ROOT / 'assets' / 'manifest.json').read_text(encoding='utf-8-sig'))
