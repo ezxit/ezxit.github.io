@@ -5,7 +5,8 @@ import json
 import re
 
 ROOT = Path(__file__).resolve().parent
-OUT = ROOT / 'dist'
+DIST = ROOT / 'dist'
+OUT = DIST / 'project'
 OUT.mkdir(parents=True, exist_ok=True)
 template = (ROOT / 'deck.template.html').read_text(encoding='utf-8')
 manifest = json.loads((ROOT / 'assets' / 'manifest.json').read_text(encoding='utf-8-sig'))
@@ -42,7 +43,8 @@ assert '@@ASSET:' not in template and '@@IMAGE_CREDITS@@' not in template
 target = OUT / '电学报告_4人4分钟.html'
 target.write_text(template, encoding='utf-8')
 (OUT / 'index.html').write_text(template, encoding='utf-8')
-(OUT / '.nojekyll').touch()
+(DIST / '.nojekyll').touch()
+(DIST / 'index.html').write_text((ROOT / 'redirect.html').read_text(encoding='utf-8'), encoding='utf-8')
 
 # Narration is maintained separately from the presentation interface.
 scripts = json.loads((ROOT / 'narration.json').read_text(encoding='utf-8-sig'))
