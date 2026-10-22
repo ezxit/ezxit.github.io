@@ -1,15 +1,15 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="zh-Hant">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="dark light">
 <link rel="icon" href="data:,">
-<title>伏打与法拉第 · 电学报告</title>
+<title>伏打與法拉第 · 電學報告</title>
 <style>
 :root{--ink:#0b1b23;--cream:#f2eee4;--mint:#a9e4c6;--amber:#e5ba80;--muted:#b2bdc0;--line:rgba(242,238,228,.22);--ui:#091218;--focus:#e5ba80}
-*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden}body{background:var(--ui);color:var(--cream);font-family:"Microsoft YaHei","PingFang SC","Noto Sans CJK SC",sans-serif;-webkit-font-smoothing:antialiased}button,input{font:inherit}button{cursor:pointer}button,a,input{touch-action:manipulation}button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid var(--focus);outline-offset:4px}button{color:inherit}button:disabled{opacity:.3;cursor:default}button svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex:none}a{color:var(--mint);text-underline-offset:4px}button{transition:background .18s,color .18s,opacity .18s}button:active:not(:disabled){background:#30434c!important}.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}[hidden]{display:none!important}
-#app{height:100%;display:flex;flex-direction:column}.app-head{height:62px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 32px;color:#b6c0c2;font-size:13px;letter-spacing:.05em}.app-head strong{color:var(--cream);font-size:14px;letter-spacing:.08em;font-weight:500}.app-head .head-actions{display:flex;align-items:center;gap:16px}.quiet-btn{border:0;background:none;padding:10px 12px;min-height:44px;border-radius:5px;font-size:13px;color:#b6c0c2}.quiet-btn:hover{color:var(--cream);background:#1c2b32}.head-rule{height:12px;width:1px;background:#39464d}.key-hint{font-size:12px;color:#a3b2b6}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden}body{background:var(--ui);color:var(--cream);font-family:"Microsoft JhengHei","PingFang TC","Noto Sans CJK TC","Microsoft YaHei",sans-serif;-webkit-font-smoothing:antialiased}button,input{font:inherit}button{cursor:pointer}button,a,input{touch-action:manipulation}button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid var(--focus);outline-offset:4px}button{color:inherit}button:disabled{opacity:.3;cursor:default}button svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex:none}a{color:var(--mint);text-underline-offset:4px}button{transition:background .18s,color .18s,opacity .18s}button:active:not(:disabled){background:#30434c!important}.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}[hidden]{display:none!important}
+#app{height:100%;display:flex;flex-direction:column}.app-head{height:62px;flex:none;display:flex;align-items:center;justify-content:flex-end;padding:0 32px;color:#b6c0c2;font-size:13px;letter-spacing:.05em}.app-head .head-actions{display:flex;align-items:center;gap:16px}.quiet-btn{border:0;background:none;padding:10px 12px;min-height:44px;border-radius:5px;font-size:13px;color:#b6c0c2}.quiet-btn:hover{color:var(--cream);background:#1c2b32}.key-hint{font-size:12px;color:#a3b2b6}
 #workspace{display:flex;flex:1;min-height:0;gap:16px;padding:0 24px}#viewport{position:relative;flex:1;min-width:0;overflow:hidden;display:flex;align-items:center;justify-content:center}#stage{width:1440px;height:810px;position:absolute;flex:none;transform-origin:center;overflow:hidden;background:var(--ink);box-shadow:0 18px 70px #0006}.slide{position:absolute;inset:0;padding:62px 76px 48px;display:none;flex-direction:column;overflow:hidden;background:var(--ink);color:var(--cream)}.slide.active{display:flex;animation:arrive .32s ease-out}.slide-top{display:flex;justify-content:space-between;align-items:center;font-size:17px;letter-spacing:.12em;color:var(--muted);height:24px;flex:none}.slide-top .edition{font-family:Consolas,monospace;letter-spacing:.05em}.slide-body{flex:1;min-height:0}.slide-bottom{display:flex;justify-content:space-between;align-items:center;font-size:16px;color:var(--muted);padding-top:25px;flex:none}.slide-bottom .part{display:flex;align-items:center;gap:12px}.part::before{content:"";width:24px;height:2px;background:var(--mint)}h1,h2,h3,p,figure{margin:0}h1,h2{font-weight:700;letter-spacing:-.035em;text-wrap:balance}h1{font-size:112px;line-height:1.14}h2{font-size:64px;line-height:1.23}p{font-size:28px;line-height:1.7}.accent{color:var(--mint)}.gold{color:var(--amber)}.small{font-size:22px;line-height:1.65;color:var(--muted)}.eyebrow{font-size:20px;letter-spacing:.1em;color:var(--mint)}.serif{font-family:Georgia,"Times New Roman",serif}.year{font-family:Georgia,"Times New Roman",serif;font-weight:400;letter-spacing:-.055em}.rule{width:100%;height:1px;background:var(--line)}.layout{height:100%;display:flex;align-items:center;gap:68px}.photo{overflow:hidden;position:relative}.photo img{width:100%;height:100%;object-fit:cover;display:block}.photo-caption{font-size:17px;line-height:1.5;color:var(--muted)}.paper{background:#f5f1e8;color:var(--ink)}.paper img{object-fit:contain}.stack{display:flex;flex-direction:column}.lead{font-size:31px;line-height:1.65}.slide-title{padding-top:34px}.label{font-size:19px;letter-spacing:.08em;color:var(--muted)}
 /* 01: typographic cover */
 .s1 .slide-body{display:grid;grid-template-columns:1.45fr 1fr;gap:100px;align-items:center}.s1 h1{margin:22px 0 25px}.s1 .subtitle{font-size:29px;letter-spacing:.04em;color:var(--muted)}.s1 .years{align-self:center;padding-left:52px;border-left:1px solid var(--line)}.s1 .year{font-size:120px;line-height:1.05}.s1 .years p{font-size:24px;margin-top:12px}.s1 .years .rule{margin:32px 0}.s1 .names{font-size:19px;color:var(--muted);margin-top:8px}.s1 .slide-bottom{border-top:1px solid var(--line);padding-top:24px}.s1 .topic{font-size:18px}
@@ -45,71 +45,70 @@ body.mobile .s2 .portrait,body.mobile .s5 .portrait{background:#192b31}body.mobi
 </head>
 <body>
 <div id="app">
-  <header class="app-head"><strong>电学 · 物理课堂报告</strong><div class="head-actions"><span class="key-hint">← → 翻页 · F 全屏</span><span class="head-rule"></span><button class="quiet-btn desktop-only" id="helpBtn">使用说明</button><button class="quiet-btn" id="sourcesBtn">参考资料</button></div></header>
+  <header class="app-head"><div class="head-actions"><span class="key-hint">← → 翻頁 · F 全屏</span><button class="quiet-btn" id="sourcesBtn">參考資料</button></div></header>
   <div id="workspace">
-    <main id="viewport" aria-label="幻灯片演示区域">
+    <main id="viewport" aria-label="幻燈片演示區域">
       <div id="stage">
-        <section class="slide s1 active" data-title="电，怎样走进生活？" aria-labelledby="title1">
-          <div class="slide-top"><span>电学与现代生活</span><span class="edition">01 / 08</span></div>
+        <section class="slide s1 active" data-title="電，怎樣走進生活？" aria-labelledby="title1">
+          <div class="slide-top"><span>電學與現代生活</span><span class="edition">01 / 08</span></div>
           <div class="slide-body">
-            <div><div class="eyebrow">伏打与法拉第</div><h1 id="title1">电，怎样<br>走进生活？</h1><p class="subtitle">两位物理学家的发明与影响</p></div>
-            <div class="years"><div><div class="year gold">1800</div><p>电堆 · 持续的电流</p><div class="names">Alessandro Volta</div></div><div class="rule"></div><div><div class="year accent">1831</div><p>电磁感应 · 运动发电</p><div class="names">Michael Faraday</div></div></div>
+            <div><div class="eyebrow">伏打與法拉第</div><h1 id="title1">電，怎樣<br>走進生活？</h1><p class="subtitle">兩位物理學家的發明與影響</p></div>
+            <div class="years"><div><div class="year gold">1800</div><p>電堆 · 持續的電流</p><div class="names">Alessandro Volta</div></div><div class="rule"></div><div><div class="year accent">1831</div><p>電磁感應 · 運動發電</p><div class="names">Michael Faraday</div></div></div>
           </div>
-          <div class="slide-bottom"><span class="topic">化学反应供电 / 机械运动发电</span></div>
+          <div class="slide-bottom"><span class="topic">化學反應供電 / 機械運動發電</span></div>
         </section>
-        <section class="slide s2" data-title="伏打的电堆" aria-labelledby="title2" inert>
-          <div class="slide-top"><span>伏打 · 发明</span><span class="edition">02 / 08</span></div>
+        <section class="slide s2" data-title="伏打的電堆" aria-labelledby="title2" inert>
+          <div class="slide-top"><span>伏打 · 發明</span><span class="edition">02 / 08</span></div>
           <div class="slide-body"><div class="layout">
-            <figure class="portrait photo"><img src="@@ASSET:volta.jpg@@" alt="意大利物理学家亚历山德罗·伏打的历史肖像"><figcaption class="portrait-name">亚历山德罗·伏打<small>Alessandro Volta · 1745–1827</small></figcaption></figure>
-            <div class="copy"><div class="year">1800</div><h2 id="title2">伏打的电堆</h2><p class="material">锌片与铜片交替堆叠，<br>中间夹入浸盐水的布片或纸片。</p><p class="discovery">让实验有了持续的电流来源</p></div>
+            <figure class="portrait photo"><img src="@@ASSET:volta.jpg@@" alt="意大利物理學家亞歷山德羅·伏打的歷史肖像"><figcaption class="portrait-name">亞歷山德羅·伏打<small>Alessandro Volta · 1745–1827</small></figcaption></figure>
+            <div class="copy"><div class="year">1800</div><h2 id="title2">伏打的電堆</h2><p class="material">鋅片與銅片交替堆疊，<br>中間夾入浸鹽水的布片或紙片。</p><p class="discovery">讓實驗有了持續的電流來源</p></div>
           </div></div>
           <div class="slide-bottom"></div>
         </section>
-        <section class="slide s3" data-title="电堆怎样供电？" aria-labelledby="title3" inert>
+        <section class="slide s3" data-title="電堆怎樣供電？" aria-labelledby="title3" inert>
           <div class="slide-top"><span>伏打 · 原理</span><span class="edition">03 / 08</span></div>
-          <div class="slide-body"><h2 class="slide-title" id="title3">电堆怎样供电？</h2><div class="layout">
-            <div class="copy"><div class="energy">化学能 → 电能</div><div class="steps"><span>01</span><p>金属与电解液发生化学反应</p><span>02</span><p>接通电路，形成电流</p><span>03</span><p>多层电池串联，提高总电压</p></div></div>
-            <figure><div class="diagram paper"><img src="@@ASSET:voltaic-pile.png@@" alt="伏打电堆示意图：铜、锌和浸电解液隔层交替堆叠"></div><figcaption>铜（Copper）、锌（Zinc）与浸盐水的隔层<br>示意图：Borbrav / Luigi Chiesa · CC BY-SA 3.0</figcaption></figure>
+          <div class="slide-body"><h2 class="slide-title" id="title3">電堆怎樣供電？</h2><div class="layout">
+            <div class="copy"><div class="energy">化學能 → 電能</div><div class="steps"><span>01</span><p>金屬與電解液發生化學反應</p><span>02</span><p>接通電路，形成電流</p><span>03</span><p>多層電池串聯，提高總電壓</p></div></div>
+            <figure><div class="diagram paper"><img src="@@ASSET:voltaic-pile.png@@" alt="伏打電堆示意圖：銅、鋅和浸電解液隔層交替堆疊"></div><figcaption>銅（Copper）、鋅（Zinc）與浸鹽水的隔層<br>示意圖：Borbrav / Luigi Chiesa · CC BY-SA 3.0</figcaption></figure>
           </div></div>
           <div class="slide-bottom"></div>
         </section>
-        <section class="slide s4" data-title="电池，让电能随身" aria-labelledby="title4" inert>
-          <div class="slide-top"><span>伏打 · 现代影响</span><span class="edition">04 / 08</span></div>
-          <div class="slide-body"><div class="layout"><div class="copy"><h2 id="title4">电池，让<span class="accent">电能随身</span></h2><dl class="impact"><dt>研究</dt><dd>持续电流推动电解与电学实验</dd><dt>生活</dt><dd>手电筒、手机和电动车<br>都需要电池供能</dd><dt>发展</dt><dd>现代锂电池是后世<br>众多研究者长期改良的成果</dd></dl></div><figure class="phone photo"><img src="@@ASSET:phone-charging.jpg@@" alt="智能手机放置在充电座上充电的实拍照片"><figcaption class="caption">现代手机充电场景 · LG / CC BY 2.0</figcaption></figure></div></div>
+        <section class="slide s4" data-title="電池，讓電能隨身" aria-labelledby="title4" inert>
+          <div class="slide-top"><span>伏打 · 現代影響</span><span class="edition">04 / 08</span></div>
+          <div class="slide-body"><div class="layout"><div class="copy"><h2 id="title4">電池，讓<span class="accent">電能隨身</span></h2><dl class="impact"><dt>研究</dt><dd>持續電流推動電解與電學實驗</dd><dt>生活</dt><dd>手電筒、手機和電動車<br>都需要電池供能</dd><dt>發展</dt><dd>現代鋰電池是後世<br>衆多研究者長期改良的成果</dd></dl></div><figure class="phone photo"><img src="@@ASSET:phone-charging.jpg@@" alt="智能手機放置在充電座上充電的實拍照片"><figcaption class="caption">現代手機充電場景 · LG / CC BY 2.0</figcaption></figure></div></div>
           <div class="slide-bottom"></div>
         </section>
-        <section class="slide s5" data-title="法拉第：磁也能生电" aria-labelledby="title5" inert>
-          <div class="slide-top"><span>法拉第 · 发现</span><span class="edition">05 / 08</span></div>
-          <div class="slide-body"><div class="layout"><div class="copy"><div class="year">1831</div><h2 id="title5">法拉第：磁也能生电</h2><p class="principle">磁通量改变 → 感应电压</p><p class="experiment">把磁铁移入或移出线圈，<br>在闭合电路中可产生感应电流。<br><span class="muted">关键：穿过线圈的磁通量要改变。</span></p></div><figure class="portrait photo"><img src="@@ASSET:faraday.jpg@@" alt="英国物理学家迈克尔·法拉第的历史肖像"><figcaption>迈克尔·法拉第<small>Michael Faraday · 1791–1867</small></figcaption></figure></div></div>
+        <section class="slide s5" data-title="法拉第：磁也能生電" aria-labelledby="title5" inert>
+          <div class="slide-top"><span>法拉第 · 發現</span><span class="edition">05 / 08</span></div>
+          <div class="slide-body"><div class="layout"><div class="copy"><div class="year">1831</div><h2 id="title5">法拉第：磁也能生電</h2><p class="principle">磁通量改變 → 感應電壓</p><p class="experiment">把磁鐵移入或移出線圈，<br>在閉合電路中可產生感應電流。<br><span class="muted">關鍵：穿過線圈的磁通量要改變。</span></p></div><figure class="portrait photo"><img src="@@ASSET:faraday.jpg@@" alt="英國物理學家邁克爾·法拉第的歷史肖像"><figcaption>邁克爾·法拉第<small>Michael Faraday · 1791–1867</small></figcaption></figure></div></div>
           <div class="slide-bottom"></div>
         </section>
-        <section class="slide s6" data-title="转动的铜盘，早期的发电机" aria-labelledby="title6" inert>
-          <div class="slide-top"><span>法拉第 · 发明</span><span class="edition">06 / 08</span></div>
-          <div class="slide-body"><h2 class="slide-title" id="title6">转动的铜盘，早期的发电机</h2><div class="layout"><figure><div class="disk paper"><img src="@@ASSET:faraday-disk.jpg@@" alt="法拉第圆盘发电机历史绘图：铜盘在磁铁两极之间转动"></div><figcaption>法拉第圆盘 · 历史绘图（Émile Alglave，1884）</figcaption></figure><div class="copy"><div class="eyebrow">1831 · 法拉第圆盘</div><div class="energy">机械能<span class="arrow">→</span>电能</div><p>铜盘在磁场中旋转，<br>通过电刷接出直流电。</p><p class="small">这项实验展示了<br>把机械运动转为电能的方法。</p></div></div></div>
+        <section class="slide s6" data-title="轉動的銅盤，早期的發電機" aria-labelledby="title6" inert>
+          <div class="slide-top"><span>法拉第 · 發明</span><span class="edition">06 / 08</span></div>
+          <div class="slide-body"><h2 class="slide-title" id="title6">轉動的銅盤，早期的發電機</h2><div class="layout"><figure><div class="disk paper"><img src="@@ASSET:faraday-disk.jpg@@" alt="法拉第圓盤發電機歷史繪圖：銅盤在磁鐵兩極之間轉動"></div><figcaption>法拉第圓盤 · 歷史繪圖（Émile Alglave，1884）</figcaption></figure><div class="copy"><div class="eyebrow">1831 · 法拉第圓盤</div><div class="energy">機械能<span class="arrow">→</span>電能</div><p>銅盤在磁場中旋轉，<br>通過電刷接出直流電。</p><p class="small">這項實驗展示了<br>把機械運動轉爲電能的方法。</p></div></div></div>
           <div class="slide-bottom"></div>
         </section>
-        <section class="slide s7" data-title="电磁感应与现代发电" aria-labelledby="title7" inert>
-          <img class="bg" src="@@ASSET:generator.jpg@@" alt="现代发电厂的蒸汽轮机发电机组，旁边工人展示了设备的巨大尺度">
-          <div class="slide-top"><span>法拉第 · 现代影响</span><span class="edition">07 / 08</span></div>
-          <div class="slide-body"><h2 id="title7">今天的发电厂，<br>仍用到<span class="accent">电磁感应</span></h2><div class="energy-chain"><span>水流 / 风 / 蒸汽</span><span class="arrow">→</span><span>机械转动</span><span class="arrow">→</span><strong class="accent">电能</strong></div><p class="application">多数大型发电机利用这一原理。<br>变压器也利用电磁感应来调节电压。</p></div>
-          <div class="slide-bottom"><span class="source-caption">图：现代蒸汽轮机发电机 · NRC</span></div>
+        <section class="slide s7" data-title="電磁感應與現代發電" aria-labelledby="title7" inert>
+          <img class="bg" src="@@ASSET:generator.jpg@@" alt="現代發電廠的蒸汽輪機發電機組，旁邊工人展示了設備的巨大尺度">
+          <div class="slide-top"><span>法拉第 · 現代影響</span><span class="edition">07 / 08</span></div>
+          <div class="slide-body"><h2 id="title7">今天的發電廠，<br>仍用到<span class="accent">電磁感應</span></h2><div class="energy-chain"><span>水流 / 風 / 蒸汽</span><span class="arrow">→</span><span>機械轉動</span><span class="arrow">→</span><strong class="accent">電能</strong></div><p class="application">多數大型發電機利用這一原理。<br>變壓器也利用電磁感應來調節電壓。</p></div>
+          <div class="slide-bottom"><span class="source-caption">圖：現代蒸汽輪機發電機 · NRC</span></div>
         </section>
-        <section class="slide s8" data-title="两项贡献，连接现代生活" aria-labelledby="title8" inert>
-          <div class="slide-top"><span>总结 · 两项贡献</span><span class="edition">08 / 08</span></div>
-          <div class="slide-body"><h2 id="title8">两项贡献，连接现代生活</h2><div class="comparison"><div class="compare-unit"><div class="who"><strong>伏打</strong><span class="year">1800</span></div><div class="formula">化学能 → 电能</div><p class="result">电堆，为电池技术开路</p></div><div class="compare-unit"><div class="who"><strong>法拉第</strong><span class="year">1831</span></div><div class="formula">机械能 → 电能</div><p class="result">电磁感应，为发电技术奠基</p></div></div><p class="conclusion">口袋里的电池，城市里的电网，<br>都与他们的探索有关。</p></div>
-          <div class="slide-bottom"><span class="thanks">谢谢聆听</span></div>
+        <section class="slide s8" data-title="兩項貢獻，連接現代生活" aria-labelledby="title8" inert>
+          <div class="slide-top"><span>總結 · 兩項貢獻</span><span class="edition">08 / 08</span></div>
+          <div class="slide-body"><h2 id="title8">兩項貢獻，連接現代生活</h2><div class="comparison"><div class="compare-unit"><div class="who"><strong>伏打</strong><span class="year">1800</span></div><div class="formula">化學能 → 電能</div><p class="result">電堆，爲電池技術開路</p></div><div class="compare-unit"><div class="who"><strong>法拉第</strong><span class="year">1831</span></div><div class="formula">機械能 → 電能</div><p class="result">電磁感應，爲發電技術奠基</p></div></div><p class="conclusion">口袋裏的電池，城市裏的電網，<br>都與他們的探索有關。</p></div>
+          <div class="slide-bottom"><span class="thanks">謝謝聆聽</span></div>
         </section>
       </div>
     </main>
   </div>
   <footer class="control-bar" aria-label="演示控制">
-    <nav class="navigation" aria-label="幻灯片翻页"><button class="icon-btn" id="prev" aria-label="上一页" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg></button><span class="page-count"><span id="pageNow">01</span><span class="total"> / 08</span></span><button class="icon-btn" id="next" aria-label="下一页"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m10 6 6 6-6 6"/></svg></button></nav>
-    <div class="tools"><button class="tool-btn fullscreen-btn" id="fullBtn" aria-label="进入全屏" title="进入或退出全屏（F）"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H3v5M16 3h5v5M21 16v5h-5M8 21H3v-5"/></svg><span class="tool-label">全屏</span></button></div>
+    <nav class="navigation" aria-label="幻燈片翻頁"><button class="icon-btn" id="prev" aria-label="上一頁" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg></button><span class="page-count"><span id="pageNow">01</span><span class="total"> / 08</span></span><button class="icon-btn" id="next" aria-label="下一頁"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m10 6 6 6-6 6"/></svg></button></nav>
+    <div class="tools"><button class="tool-btn fullscreen-btn" id="fullBtn" aria-label="進入全屏" title="進入或退出全屏（F）"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H3v5M16 3h5v5M21 16v5h-5M8 21H3v-5"/></svg><span class="tool-label">全屏</span></button></div>
   </footer>
   <div class="bottom-progress" aria-hidden="true"><span id="slideProgress"></span></div>
 </div>
-<dialog id="sourcesDialog" aria-labelledby="sourcesTitle"><div class="dialog-head"><h2 id="sourcesTitle">参考资料与图片来源</h2><button class="close-btn" data-close="sourcesDialog" aria-label="关闭参考资料">×</button></div><div class="dialog-body"><h3 class="source-heading">知识来源</h3><ol class="source-list"><li><a href="https://nationalmaglab.org/magnet-academy/history-of-electricity-magnetism/museum/voltaic-pile-1800/" target="_blank" rel="noopener noreferrer">National MagLab：Voltaic Pile, 1800</a><br><small>伏打电堆的年份、锌铜结构、盐水隔层与持续电流。</small></li><li><a href="https://www.rigb.org/explore-science/explore/collection/alessandro-voltas-voltaic-pile" target="_blank" rel="noopener noreferrer">Royal Institution：Alessandro Volta's voltaic pile</a><br><small>1800 年的电池与馆藏电堆构造。</small></li><li><a href="https://www.rigb.org/explore-science/explore/collection/michael-faradays-generator" target="_blank" rel="noopener noreferrer">Royal Institution：Michael Faraday's generator</a><br><small>1831 年电磁感应、磁铁线圈实验与现代发电。</small></li><li><a href="https://nationalmaglab.org/magnet-academy/history-of-electricity-magnetism/pioneers/michael-faraday/" target="_blank" rel="noopener noreferrer">National MagLab：Michael Faraday</a><br><small>铜盘发电机及后续发电机、变压器的发展。</small></li></ol><h3 class="source-heading">图片署名与许可</h3><ul class="source-list" id="imageCredits">@@IMAGE_CREDITS@@</ul><p>图片以原始内容嵌入；仅通过页面样式裁切或调整显示尺寸。电堆示意图按原许可使用。本演示稿与现代技术的联系指后续发展及原理应用。</p></div></dialog>
-<dialog id="helpDialog" aria-labelledby="helpTitle"><div class="dialog-head"><h2 id="helpTitle">演示按键</h2><button class="close-btn" data-close="helpDialog" aria-label="关闭说明">×</button></div><div class="dialog-body"><div class="shortcuts"><div><span>下一页 / 上一页</span><kbd>→ / ←</kbd></div><div><span>下一页</span><kbd>空格 / PgDn</kbd></div><div><span>第一页 / 最后一页</span><kbd>Home / End</kbd></div><div><span>进入 / 退出全屏</span><kbd>F</kbd></div><div><span>退出全屏或弹窗</span><kbd>Esc</kbd></div></div><p style="margin-top:23px">全屏仅显示幻灯片，使用方向键、空格或手机左右轻扫翻页。</p><p style="margin-top:12px">所有图片与样式已内嵌，断网也能演示。使用浏览器打印可保存全部 8 页。</p></div></dialog>
+<dialog id="sourcesDialog" aria-labelledby="sourcesTitle"><div class="dialog-head"><h2 id="sourcesTitle">參考資料與圖片來源</h2><button class="close-btn" data-close="sourcesDialog" aria-label="關閉參考資料">×</button></div><div class="dialog-body"><h3 class="source-heading">知識來源</h3><ol class="source-list"><li><a href="https://nationalmaglab.org/magnet-academy/history-of-electricity-magnetism/museum/voltaic-pile-1800/" target="_blank" rel="noopener noreferrer">National MagLab：Voltaic Pile, 1800</a><br><small>伏打電堆的年份、鋅銅結構、鹽水隔層與持續電流。</small></li><li><a href="https://www.rigb.org/explore-science/explore/collection/alessandro-voltas-voltaic-pile" target="_blank" rel="noopener noreferrer">Royal Institution：Alessandro Volta's voltaic pile</a><br><small>1800 年的電池與館藏電堆構造。</small></li><li><a href="https://www.rigb.org/explore-science/explore/collection/michael-faradays-generator" target="_blank" rel="noopener noreferrer">Royal Institution：Michael Faraday's generator</a><br><small>1831 年電磁感應、磁鐵線圈實驗與現代發電。</small></li><li><a href="https://nationalmaglab.org/magnet-academy/history-of-electricity-magnetism/pioneers/michael-faraday/" target="_blank" rel="noopener noreferrer">National MagLab：Michael Faraday</a><br><small>銅盤發電機及後續發電機、變壓器的發展。</small></li></ol><h3 class="source-heading">圖片署名與許可</h3><ul class="source-list" id="imageCredits">@@IMAGE_CREDITS@@</ul><p>圖片以原始內容嵌入；僅通過頁面樣式裁切或調整顯示尺寸。電堆示意圖按原許可使用。本演示稿與現代技術的聯繫指後續發展及原理應用。</p></div></dialog>
 <div id="toast" role="status" hidden></div><div class="sr-only" aria-live="polite" id="pageAnnouncement"></div>
 <script>
 const $=id=>document.getElementById(id), slides=[...document.querySelectorAll('.slide')];
@@ -135,8 +134,8 @@ function goTo(index,updateHash=true){
   $('pageNow').textContent=String(current+1).padStart(2,'0');
   $('slideProgress').style.width=((current+1)/slides.length*100)+'%';
   const title=slides[current].dataset.title;
-  $('pageAnnouncement').textContent='第 '+(current+1)+' 页，共 '+slides.length+' 页。'+title;
-  document.title=(current+1)+'/'+slides.length+' '+title+' · 电学报告';
+  $('pageAnnouncement').textContent='第 '+(current+1)+' 頁，共 '+slides.length+' 頁。'+title;
+  document.title=(current+1)+'/'+slides.length+' '+title+' · 電學報告';
   if(updateHash){try{history.replaceState(null,'','#'+(current+1))}catch{}}
 }
 function openDialog(id){const dialog=$(id);if(!dialog.open)dialog.showModal()}
@@ -150,13 +149,13 @@ async function fullscreen(){
   try{
     if(document.fullscreenElement)await document.exitFullscreen();
     else await document.documentElement.requestFullscreen();
-  }catch{toast('请在浏览器的网站权限中开启全屏。')}
+  }catch{toast('請在瀏覽器的網站權限中開啓全屏。')}
 }
 $('viewport').tabIndex=-1;
 document.addEventListener('fullscreenchange',()=>{
   const full=!!document.fullscreenElement;
   document.body.classList.toggle('fullscreen',full);
-  $('fullBtn').setAttribute('aria-label',full?'退出全屏':'进入全屏');
+  $('fullBtn').setAttribute('aria-label',full?'退出全屏':'進入全屏');
   if(full){
     document.querySelectorAll('dialog[open]').forEach(dialog=>dialog.close());
     $('toast').hidden=true;
@@ -168,7 +167,6 @@ $('prev').addEventListener('click',()=>goTo(current-1));
 $('next').addEventListener('click',()=>goTo(current+1));
 $('fullBtn').addEventListener('click',fullscreen);
 $('sourcesBtn').addEventListener('click',()=>openDialog('sourcesDialog'));
-$('helpBtn').addEventListener('click',()=>openDialog('helpDialog'));
 document.querySelectorAll('[data-close]').forEach(button=>button.addEventListener('click',()=>$(button.dataset.close).close()));
 document.querySelectorAll('dialog').forEach(dialog=>dialog.addEventListener('click',event=>{
   const rect=dialog.getBoundingClientRect();
@@ -185,7 +183,6 @@ document.addEventListener('keydown',event=>{
   else if(key==='end'){event.preventDefault();goTo(slides.length-1)}
   else if(key==='f'){event.preventDefault();fullscreen()}
   else if(key==='escape'&&document.fullscreenElement){event.preventDefault();document.exitFullscreen()}
-  else if(key==='?'&&!document.fullscreenElement)openDialog('helpDialog');
 });
 let touchStart=null;
 $('viewport').addEventListener('touchstart',event=>{

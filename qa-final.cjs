@@ -30,20 +30,31 @@ async (page) => {
       document.activeElement?.blur();
     });
     const stripped = await page.evaluate(() => ({
-      removed: [...document.querySelectorAll('#notes,#notesBtn,#overviewBtn,#overviewDialog,#overviewGrid,#timerBtn,#timerValue,#timingProgress,.timing-progress,#autoAdvance,#resetTimer,.speaker-info,#speakerTime')].map(node => node.id || node.className),
+      removed: [...document.querySelectorAll('#notes,#notesBtn,#overviewBtn,#overviewDialog,#overviewGrid,#timerBtn,#timerValue,#timingProgress,.timing-progress,#autoAdvance,#resetTimer,.speaker-info,#speakerTime,#helpBtn,#helpDialog,.app-head strong')].map(node => node.id || node.className),
       bottomButtons: [...document.querySelectorAll('.control-bar button')].map(button => button.id).sort(),
-      timing: /\b\d{1,2}\s*[:\uff1a]\s*\d{2}\b|\d+\s*(?:\u5206\u949f|\u79d2)|\u8ba1\u65f6|\u5012\u8ba1\u65f6/.test(document.title + '\n' + [...document.querySelectorAll('.slide')].map(slide => slide.textContent).join('\n')),
+      headerButtons: [...document.querySelectorAll('.app-head button')].map(button => button.id).sort(),
+      headerHasKeyHint: !!document.querySelector('.app-head .key-hint'),
+      lang: document.documentElement.lang,
+      traditionalCopy: document.querySelector('#sourcesBtn')?.textContent.trim() === '\u53c3\u8003\u8cc7\u6599' && document.querySelector('#title2')?.textContent.trim() === '\u4f0f\u6253\u7684\u96fb\u5806' && document.querySelector('#title8')?.textContent.includes('\u5169\u9805\u8ca2\u737b'),
+      simplifiedCopy: /\u53c2\u8003\u8d44\u6599|\u7535\u5806|\u7535\u6c60|\u53d1\u7535|\u7535\u78c1\u611f\u5e94|\u73b0\u4ee3\u751f\u6d3b|\u4e24\u9879\u8d21\u732e/.test(document.title + '\n' + [...document.querySelectorAll('.slide,.app-head')].map(node => node.textContent).join('\n') + '\n' + [...document.images].map(image => image.alt).join('\n')),
+      staleLabels: /[\u8bb2\u8b1b]\u7a3f|[\u603b\u7e3d][\u89c8\u89bd]|(?:\u5012)?[\u8ba1\u8a08][\u65f6\u6642]/.test(document.body.innerText),
+      timing: /\b\d{1,2}\s*[:\uff1a]\s*\d{2}\b|[\d\u4e00\u4e8c\u4e09\u56db\u4e94\u516d\u4e03\u516b\u4e5d\u5341]+\s*(?:\u5206[\u949f\u9418]|\u79d2)|(?:\u5012)?[\u8ba1\u8a08][\u65f6\u6642]|[\u62a5\u5831]\u544a[\u65f6\u6642][\u957f\u9577]|\u6f14[\u8bb2\u8b1b][\u65f6\u6642][\u957f\u9577]/.test(document.title + '\n' + [...document.querySelectorAll('.slide')].map(slide => slide.textContent).join('\n')),
       allImagesLoaded: [...document.images].every(image => image.complete && image.naturalWidth > 0)
     }));
-    assert(stripped.removed.length === 0 && !stripped.timing, 'Removed feature or report duration remains in the presentation', stripped);
+    assert(stripped.removed.length === 0 && !stripped.timing && !stripped.staleLabels, 'Removed feature or report duration remains in the presentation', stripped);
     assert(JSON.stringify(stripped.bottomButtons) === JSON.stringify(['fullBtn', 'next', 'prev']), 'Bottom navigation contains extra controls', stripped.bottomButtons);
+    assert(JSON.stringify(stripped.headerButtons) === JSON.stringify(['sourcesBtn']) && stripped.headerHasKeyHint, 'Header must contain only sources and its keyboard hint', stripped);
+    assert(stripped.lang === 'zh-Hant' && stripped.traditionalCopy && !stripped.simplifiedCopy, 'Traditional Chinese language or representative copy is incorrect', stripped);
     assert(stripped.allImagesLoaded, 'A presentation image did not load');
 
     for (const [width, height, name] of [[1440, 1000, 'desktop'], [375, 812, 'mobile']]) {
       await page.setViewportSize({ width, height });
       for (let index = 0; index < 8; index++) {
         await page.evaluate(value => goTo(value), index);
-        await page.waitForTimeout(120);
+        await page.evaluate(async () => {
+          await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+          await Promise.all(document.querySelector('.slide.active').getAnimations().map(animation => animation.finished.catch(() => {})));
+        });
         const layout = await page.evaluate(() => {
           const slide = document.querySelector('.slide.active');
           const bounds = slide.getBoundingClientRect();
@@ -61,7 +72,7 @@ async (page) => {
             images: [...slide.querySelectorAll('img')].every(image => image.complete && image.naturalWidth > 0),
             fits: bounds.left >= viewport.left - 1 && bounds.right <= viewport.right + 1 && bounds.top >= viewport.top - 1 && bounds.bottom <= viewport.bottom + 1,
             overflow: document.documentElement.scrollWidth > innerWidth + 1 || document.documentElement.scrollHeight > innerHeight + 1,
-            timedTitle: /\d+\s*\u5206\u949f|\u8ba1\u65f6|\u5012\u8ba1\u65f6/.test(document.title)
+            timedTitle: /\d+\s*\u5206[\u949f\u9418]|(?:\u5012)?[\u8ba1\u8a08][\u65f6\u6642]/.test(document.title)
           };
         });
         layouts.push({ viewport: name, ...layout });
@@ -103,6 +114,8 @@ async (page) => {
       assert(await page.locator('#imageCredits li').count() >= 6, 'Image credits are incomplete', name);
       await page.keyboard.press('Escape');
       assert(!await page.locator('#sourcesDialog').isVisible(), 'Sources dialog did not close with Escape', name);
+      await page.keyboard.press('?');
+      assert(await page.evaluate(() => !document.querySelector('#helpBtn,#helpDialog,.app-head strong,dialog[open]')), 'Removed help control, heading or shortcut remains', name);
     }
 
     await page.setViewportSize({ width: 1440, height: 1000 });

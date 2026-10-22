@@ -16,22 +16,22 @@ for name in set(used):
     mime = 'image/png' if name.endswith('.png') else 'image/jpeg'
     template = template.replace(f'@@ASSET:{name}@@', f'data:{mime};base64,{base64.b64encode(raw).decode()}')
 names = {
-    'volta.jpg': '第 2 页：伏打肖像',
-    'voltaic-pile.png': '第 3 页：伏打电堆示意图',
-    'phone-charging.jpg': '第 4 页：手机充电',
-    'faraday.jpg': '第 5 页：法拉第肖像',
-    'faraday-disk.jpg': '第 6 页：法拉第圆盘历史绘图',
-    'generator.jpg': '第 7 页：蒸汽轮机发电机',
+    'volta.jpg': '第 2 頁：伏打肖像',
+    'voltaic-pile.png': '第 3 頁：伏打電堆示意圖',
+    'phone-charging.jpg': '第 4 頁：手機充電',
+    'faraday.jpg': '第 5 頁：法拉第肖像',
+    'faraday-disk.jpg': '第 6 頁：法拉第圓盤歷史繪圖',
+    'generator.jpg': '第 7 頁：蒸汽輪機發電機',
 }
 credits = []
 for name in used:
     item = next(x for x in manifest if x['file'] == name)
     author = item.get('author', '')
     if not author or 'Unknown' in author:
-        author = '作者未详'
+        author = '作者未詳'
     if name == 'phone-charging.jpg':
         author = 'LG전자（LG Electronics）'
-    license_name = '公有领域' if item['license'] == 'Public domain' else item['license']
+    license_name = '公有領域' if item['license'] == 'Public domain' else item['license']
     license_url = item.get('license_url')
     if license_url:
         license_text = f'<a href="{html.escape(license_url, quote=True)}" target="_blank" rel="noopener noreferrer">{html.escape(license_name)}</a>'
@@ -44,44 +44,43 @@ target = OUT / '电学报告_4人4分钟.html'
 target.write_text(template, encoding='utf-8')
 (OUT / 'index.html').write_text(template, encoding='utf-8')
 (DIST / '.nojekyll').touch()
-(DIST / 'index.html').write_text((ROOT / 'redirect.html').read_text(encoding='utf-8'), encoding='utf-8')
 
 # Narration is maintained separately from the presentation interface.
 scripts = json.loads((ROOT / 'narration.json').read_text(encoding='utf-8-sig'))
 assert len(scripts) == 8
 assert [item['speaker'] for item in scripts] == [1, 1, 2, 2, 3, 3, 4, 4]
 assert all(isinstance(item['title'], str) and isinstance(item['text'], str) for item in scripts)
-people = ['开场与伏打的发明', '电池原理与生活影响', '电磁感应与早期发电机', '现代发电与总结']
-plain_text = ['电学报告：四人分工与讲稿', '',
-              '题目：介绍两位电学物理学家的发明，并说明其对现代生活的影响。',
-              '人物：亚历山德罗·伏打、迈克尔·法拉第。共 8 页，每人负责 2 页。', '',
-              '报告分工', '']
-text = ['# 电学报告：四人分工与讲稿', '', '题目：介绍两位电学物理学家的发明，并说明其对现代生活的影响。', '',
-        '人物：亚历山德罗·伏打、迈克尔·法拉第。共 8 页，每人负责 2 页。', '',
-        '## 打开与演示', '', '打开同文件夹内的 index.html 即可在浏览器离线演示。所有图片、样式与脚本已内嵌。', '',
-        '- 方向键或 PgUp / PgDn：翻页；空格：下一页。',
-        '- F：进入或退出全屏；Esc：退出全屏。全屏只显示幻灯片内容。',
-        '- 讲稿独立保存在 4人分工与讲稿.txt，支持 Windows 记事本打开。',
-        '- 浏览器打印可导出全部 8 页。', '',
-        '## 报告分工', '', '| 报告者 | 页码 | 内容 |', '| --- | --- | --- |']
+people = ['開場與伏打的發明', '電池原理與生活影響', '電磁感應與早期發電機', '現代發電與總結']
+plain_text = ['電學報告：四人分工與講稿', '',
+              '題目：介紹兩位電學物理學家的發明，並說明其對現代生活的影響。',
+              '人物：亞歷山德羅·伏打、邁克爾·法拉第。共 8 頁，每人負責 2 頁。', '',
+              '報告分工', '']
+text = ['# 電學報告：四人分工與講稿', '', '題目：介紹兩位電學物理學家的發明，並說明其對現代生活的影響。', '',
+        '人物：亞歷山德羅·伏打、邁克爾·法拉第。共 8 頁，每人負責 2 頁。', '',
+        '## 打開與演示', '', '打開同文件夾內的 index.html 即可在瀏覽器離線演示。所有圖片、樣式與腳本已內嵌。', '',
+        '- 方向鍵或 PgUp / PgDn：翻頁；空格：下一頁。',
+        '- F：進入或退出全屏；Esc：退出全屏。全屏只顯示幻燈片內容。',
+        '- 講稿獨立保存在 4人分工与讲稿.txt，支持 Windows 記事本打開。',
+        '- 瀏覽器打印可導出全部 8 頁。', '',
+        '## 報告分工', '', '| 報告者 | 頁碼 | 內容 |', '| --- | --- | --- |']
 for i, name in enumerate(people):
-    plain_text.append(f'第 {i+1} 位：第 {i*2+1}、{i*2+2} 页；{name}。')
-    text.append(f'| 第 {i+1} 位 | 第 {i*2+1}、{i*2+2} 页 | {name} |')
-plain_text += ['', '逐页讲稿', '']
-text += ['', '## 逐页讲稿', '']
+    plain_text.append(f'第 {i+1} 位：第 {i*2+1}、{i*2+2} 頁；{name}。')
+    text.append(f'| 第 {i+1} 位 | 第 {i*2+1}、{i*2+2} 頁 | {name} |')
+plain_text += ['', '逐頁講稿', '']
+text += ['', '## 逐頁講稿', '']
 for i, item in enumerate(scripts):
-    heading = f'第 {i+1} 页：{item["title"]}'
-    speaker = f'报告者：第 {item["speaker"]} 位'
+    heading = f'第 {i+1} 頁：{item["title"]}'
+    speaker = f'報告者：第 {item["speaker"]} 位'
     plain_text += [heading, speaker, '', item['text'], '']
     text += [f'### {heading}', '', speaker, '', item['text'], '']
 (OUT / '4人分工与讲稿.txt').write_text('\n'.join(plain_text), encoding='utf-8-sig', newline='\r\n')
-text += ['## 事实与图片资料', '',
-         '- National MagLab：伏打电堆（1800）\n  https://nationalmaglab.org/magnet-academy/history-of-electricity-magnetism/museum/voltaic-pile-1800/',
-         '- Royal Institution：伏打电堆馆藏\n  https://www.rigb.org/explore-science/explore/collection/alessandro-voltas-voltaic-pile',
-         '- Royal Institution：法拉第的发电装置\n  https://www.rigb.org/explore-science/explore/collection/michael-faradays-generator',
+text += ['## 事實與圖片資料', '',
+         '- National MagLab：伏打電堆（1800）\n  https://nationalmaglab.org/magnet-academy/history-of-electricity-magnetism/museum/voltaic-pile-1800/',
+         '- Royal Institution：伏打電堆館藏\n  https://www.rigb.org/explore-science/explore/collection/alessandro-voltas-voltaic-pile',
+         '- Royal Institution：法拉第的發電裝置\n  https://www.rigb.org/explore-science/explore/collection/michael-faradays-generator',
          '- National MagLab：法拉第\n  https://nationalmaglab.org/magnet-academy/history-of-electricity-magnetism/pioneers/michael-faraday/', '',
-         '完整图片来源与许可位于 HTML 顶部“参考资料”。', '',
-         '内容提醒：伏打发明的是早期电堆，现代锂电池为后续众多研究者的成果。法拉第圆盘输出直流电，现代多数大型发电机结构不同、通常输出交流电。发电是能量转换。', '']
+         '完整圖片來源與許可位於 HTML 頂部“參考資料”。', '',
+         '內容提醒：伏打發明的是早期電堆，現代鋰電池爲後續衆多研究者的成果。法拉第圓盤輸出直流電，現代多數大型發電機結構不同、通常輸出交流電。發電是能量轉換。', '']
 (OUT / '4人分工与讲稿.md').write_text('\n'.join(text), encoding='utf-8')
 counts = []
 for i in range(4):

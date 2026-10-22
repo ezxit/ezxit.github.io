@@ -16,13 +16,18 @@ async (page) => {
       document.activeElement?.blur();
     });
     const structure = await page.evaluate(() => {
-      const removed = '#notes,#notesBtn,#closeNotes,#notesHeading,#notesPerson,#notesTitle,#notesScript,#notesCue,#notesSource,#overviewDialog,#overviewBtn,.overview-item,#overviewGrid,#timerBtn,#timerValue,#timerIcon,#timingProgress,.timing-progress,#autoAdvance,#resetTimer,.speaker-info,#speakerTime';
-      const timing = /\b\d{1,2}\s*[:\uff1a]\s*\d{2}\b|\d+\s*(?:\u5206\u949f|\u79d2)|\u5012\u8ba1\u65f6|\u8ba1\u65f6|\u62a5\u544a\u65f6\u957f|\u6f14\u8bb2\u65f6\u957f/;
+      const removed = '#notes,#notesBtn,#closeNotes,#notesHeading,#notesPerson,#notesTitle,#notesScript,#notesCue,#notesSource,#overviewDialog,#overviewBtn,.overview-item,#overviewGrid,#timerBtn,#timerValue,#timerIcon,#timingProgress,.timing-progress,#autoAdvance,#resetTimer,.speaker-info,#speakerTime,#helpBtn,#helpDialog,.app-head strong';
+      const timing = /\b\d{1,2}\s*[:\uff1a]\s*\d{2}\b|[\d\u4e00\u4e8c\u4e09\u56db\u4e94\u516d\u4e03\u516b\u4e5d\u5341]+\s*(?:\u5206[\u949f\u9418]|\u79d2)|(?:\u5012)?[\u8ba1\u8a08][\u65f6\u6642]|[\u62a5\u5831]\u544a[\u65f6\u6642][\u957f\u9577]|\u6f14[\u8bb2\u8b1b][\u65f6\u6642][\u957f\u9577]/;
+      const chineseCopy = document.title + '\n' + [...document.querySelectorAll('.slide,.app-head')].map(node => node.textContent).join('\n') + '\n' + [...document.images].map(image => image.alt).join('\n');
       return {
         removed: [...document.querySelectorAll(removed)].map(node => node.id || node.className),
         bottomButtons: [...document.querySelectorAll('.control-bar button')].map(button => button.id).sort(),
         headerButtons: [...document.querySelectorAll('.app-head button')].map(button => button.id).sort(),
-        staleLabels: /\u8bb2\u7a3f|\u603b\u89c8|\u5012\u8ba1\u65f6|\u8ba1\u65f6/.test(document.body.innerText),
+        headerHasKeyHint: !!document.querySelector('.app-head .key-hint'),
+        staleLabels: /[\u8bb2\u8b1b]\u7a3f|[\u603b\u7e3d][\u89c8\u89bd]|(?:\u5012)?[\u8ba1\u8a08][\u65f6\u6642]/.test(document.body.innerText),
+        lang: document.documentElement.lang,
+        traditionalCopy: document.querySelector('#sourcesBtn')?.textContent.trim() === '\u53c3\u8003\u8cc7\u6599' && document.querySelector('#title2')?.textContent.trim() === '\u4f0f\u6253\u7684\u96fb\u5806' && document.querySelector('#title8')?.textContent.includes('\u5169\u9805\u8ca2\u737b'),
+        simplifiedCopy: /\u53c2\u8003\u8d44\u6599|\u7535\u5806|\u7535\u6c60|\u53d1\u7535|\u7535\u78c1\u611f\u5e94|\u73b0\u4ee3\u751f\u6d3b|\u4e24\u9879\u8d21\u732e/.test(chineseCopy),
         timedSlides: [...document.querySelectorAll('.slide')].flatMap((slide, index) => timing.test(slide.textContent) ? [index + 1] : []),
         timedTitle: timing.test(document.title),
         externalAssets: [...document.images].filter(image => !image.src.startsWith('data:')).length
@@ -30,7 +35,8 @@ async (page) => {
     });
     assert(structure.removed.length === 0, 'Removed controls or in-page narration remain', structure.removed);
     assert(JSON.stringify(structure.bottomButtons) === JSON.stringify(['fullBtn', 'next', 'prev']), 'Bottom bar must contain exactly previous, next and fullscreen buttons', structure.bottomButtons);
-    assert(JSON.stringify(structure.headerButtons) === JSON.stringify(['helpBtn', 'sourcesBtn']), 'Header must retain sources and help buttons', structure.headerButtons);
+    assert(JSON.stringify(structure.headerButtons) === JSON.stringify(['sourcesBtn']) && structure.headerHasKeyHint, 'Header must contain only sources and its keyboard hint', structure);
+    assert(structure.lang === 'zh-Hant' && structure.traditionalCopy && !structure.simplifiedCopy, 'Traditional Chinese language or representative copy is incorrect', structure);
     assert(!structure.staleLabels && !structure.timedTitle && !structure.timedSlides.length, 'Presentation still exposes narration, overview or report duration', structure);
     assert(structure.externalAssets === 0, 'Presentation images must work offline', structure.externalAssets);
 
@@ -70,8 +76,8 @@ async (page) => {
             overflow: document.documentElement.scrollWidth > innerWidth + 1 || document.documentElement.scrollHeight > innerHeight + 1,
             stageFits: bounds.left >= viewport.left - 1 && bounds.right <= viewport.right + 1 && bounds.top >= viewport.top - 1 && bounds.bottom <= viewport.bottom + 1,
             pageCount: document.querySelector('#pageNow')?.textContent,
-            controlsVisible: ['prev', 'next', 'fullBtn', 'sourcesBtn'].every(id => visible(document.getElementById(id))) && (innerWidth <= 700 || visible(document.getElementById('helpBtn'))),
-            timedTitle: /\d+\s*\u5206\u949f|\u8ba1\u65f6|\u5012\u8ba1\u65f6/.test(document.title)
+            controlsVisible: ['prev', 'next', 'fullBtn', 'sourcesBtn'].every(id => visible(document.getElementById(id))),
+            timedTitle: /\d+\s*\u5206[\u949f\u9418]|(?:\u5012)?[\u8ba1\u8a08][\u65f6\u6642]/.test(document.title)
           };
         });
         report.push({ viewport: name, ...result });
@@ -100,6 +106,7 @@ async (page) => {
     await page.keyboard.press('n');
     await page.keyboard.press('o');
     await page.keyboard.press('t');
+    await page.keyboard.press('?');
     assert(await page.evaluate(() => current === 0 && !document.querySelector('dialog[open]') && !document.querySelector('#notes')), 'Removed shortcuts still trigger a presentation feature');
 
     phase = 'sources';
@@ -112,12 +119,9 @@ async (page) => {
     assert(await page.evaluate(() => current === 0), 'Arrow keys must not change slides while a dialog is open');
     await page.keyboard.press('Escape');
     assert(!await page.locator('#sourcesDialog').isVisible(), 'Escape does not close sources');
-    phase = 'help';
-    await page.locator('#helpBtn').click();
-    assert(await page.locator('#helpDialog').isVisible(), 'Help dialog does not open');
-    const help = await page.locator('#helpDialog').innerText();
-    assert(!/\u8bb2\u7a3f|\u603b\u89c8|\u8ba1\u65f6|\u5012\u8ba1\u65f6|\d+\s*(?:\u5206\u949f|\u79d2)/.test(help), 'Help still documents removed features', help);
-    await page.keyboard.press('Escape');
+    phase = 'removed help';
+    await page.keyboard.press('?');
+    assert(await page.evaluate(() => !document.querySelector('#helpBtn,#helpDialog,.app-head strong,dialog[open]')), 'Removed help control, heading or shortcut remains');
 
     phase = 'swipe';
     await page.setViewportSize({ width: 375, height: 812 });
@@ -142,7 +146,7 @@ async (page) => {
     await page.setViewportSize({ width: 1440, height: 1000 });
     await page.evaluate(() => goTo(0));
     assert(errors.length === 0, 'Browser runtime errors', errors);
-    const result = { report, errors, structure, credits, keyboard: true, swipe: true, sources: true, help: true, reduced };
+    const result = { report, errors, structure, credits, keyboard: true, swipe: true, sources: true, removedHelp: true, traditionalChinese: true, reduced };
     await page.evaluate(value => { window.qaReport = value; }, result);
     return result;
   } catch (error) {
