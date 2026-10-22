@@ -7,6 +7,8 @@ async (page) => {
   page.on('pageerror', onError);
   const layouts = [];
   const fullscreen = [];
+  const fontReport = { css: null, samples: [] };
+  let fontSession;
   const chromeState = () => page.evaluate(() => ['.app-head', '.control-bar', '.bottom-progress'].map(selector => {
     const node = document.querySelector(selector);
     if (!node) return { selector, missing: true };
@@ -29,6 +31,62 @@ async (page) => {
       await Promise.all([...document.images].map(image => image.decode().catch(() => {})));
       document.activeElement?.blur();
     });
+    fontReport.css = await page.evaluate(() => {
+      const family = 'Electricity CJK Light';
+      const faces = [...document.styleSheets].flatMap(sheet => [...sheet.cssRules])
+        .filter(rule => rule.type === CSSRule.FONT_FACE_RULE && rule.style.getPropertyValue('font-family').replace(/["']/g, '').trim() === family)
+        .map(rule => {
+          const source = rule.style.getPropertyValue('src');
+          const urls = [...source.matchAll(/url\(\s*(?:"([^"]*)"|'([^']*)'|([^)]*))\s*\)/g)].map(match => (match[1] ?? match[2] ?? match[3]).trim());
+          return {
+            family,
+            weight: rule.style.getPropertyValue('font-weight').trim(),
+            embeddedWoff2Only: urls.length > 0 && urls.every(url => /^data:font\/woff2[;,]/i.test(url)),
+            hasLocalSource: /\blocal\s*\(/i.test(source),
+            sourceCount: urls.length,
+            sourceCharacters: source.length,
+            unicodeRange: rule.style.getPropertyValue('unicode-range')
+          };
+        });
+      return { family, faces, bodyFamily: getComputedStyle(document.body).fontFamily, bodySynthesis: getComputedStyle(document.body).fontSynthesis };
+    });
+    assert(fontReport.css.faces.length > 0 && fontReport.css.faces.every(face => face.weight === '300' && face.embeddedWoff2Only && !face.hasLocalSource), 'Chinese Light font must be weight 300 and embedded WOFF2 with no local or external source', fontReport.css);
+    assert(fontReport.css.bodyFamily.includes(fontReport.css.family) && fontReport.css.bodySynthesis === 'none', 'Chinese Light font or font-synthesis:none is missing from the document', fontReport.css);
+
+    fontSession = await page.context().newCDPSession(page);
+    await fontSession.send('DOM.enable');
+    await fontSession.send('CSS.enable');
+    const { root } = await fontSession.send('DOM.getDocument');
+    for (const sample of [
+      { selector: '#title1', slide: 0, kind: 'chinese-heading' },
+      { selector: '.s1 .subtitle', slide: 0, kind: 'chinese-body' },
+      { selector: '#sourcesBtn', slide: 0, kind: 'chinese-control' },
+      { selector: '.s8 .who strong', slide: 7, kind: 'chinese-strong' },
+      { selector: '.s1 .year', slide: 0, kind: 'latin-year' }
+    ]) {
+      await page.evaluate(index => goTo(index), sample.slide);
+      await page.evaluate(async () => {
+        await document.fonts.ready;
+        await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+      });
+      const { nodeId } = await fontSession.send('DOM.querySelector', { nodeId: root.nodeId, selector: sample.selector });
+      assert(nodeId > 0, 'Font verification sample is missing', sample);
+      const { fonts } = await fontSession.send('CSS.getPlatformFontsForNode', { nodeId });
+      const style = await page.locator(sample.selector).first().evaluate(node => {
+        const computed = getComputedStyle(node);
+        return { text: node.textContent.trim(), family: computed.fontFamily, weight: computed.fontWeight, synthesis: computed.fontSynthesis };
+      });
+      const renderedFonts = fonts.filter(font => font.glyphCount > 0);
+      const report = { ...sample, style, fonts: renderedFonts };
+      fontReport.samples.push(report);
+      if (sample.kind === 'latin-year') {
+        assert(renderedFonts.length > 0 && renderedFonts.every(font => !font.isCustomFont && /Georgia/i.test(font.familyName + ' ' + font.postScriptName)), 'Year digits must retain the platform Georgia font', report);
+      } else {
+        assert(style.synthesis === 'none', 'Chinese text must disable synthetic font weight', report);
+        assert(renderedFonts.length > 0 && renderedFonts.every(font => font.isCustomFont && /Electricity.*Light/i.test(font.postScriptName)), 'Chinese glyphs must use the embedded Electricity Light subset', report);
+      }
+    }
+    await page.evaluate(() => goTo(0));
     const stripped = await page.evaluate(() => ({
       removed: [...document.querySelectorAll('#notes,#notesBtn,#overviewBtn,#overviewDialog,#overviewGrid,#timerBtn,#timerValue,#timingProgress,.timing-progress,#autoAdvance,#resetTimer,.speaker-info,#speakerTime,#helpBtn,#helpDialog,.app-head strong')].map(node => node.id || node.className),
       bottomButtons: [...document.querySelectorAll('.control-bar button')].map(button => button.id).sort(),
@@ -123,11 +181,12 @@ async (page) => {
     await page.screenshot({ path: 'output/playwright/final-cover.png', scale: 'css', animations: 'disabled' });
     await page.pdf({ path: 'output/playwright/print-check.pdf', printBackground: true, preferCSSPageSize: true });
     assert(errors.length === 0, 'Browser runtime errors', errors);
-    const result = { errors, layouts, stripped, fullscreen, sources: true, allImagesLoaded: stripped.allImagesLoaded };
+    const result = { errors, layouts, stripped, fullscreen, fontReport, sources: true, allImagesLoaded: stripped.allImagesLoaded };
     await page.evaluate(value => { window.qaFinalReport = value; }, result);
     return result;
   } finally {
     if (await page.evaluate(() => !!document.fullscreenElement).catch(() => false)) await page.evaluate(() => document.exitFullscreen());
+    if (fontSession) await fontSession.detach().catch(() => {});
     page.off('pageerror', onError);
   }
 }

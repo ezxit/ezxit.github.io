@@ -39,10 +39,16 @@ for name in used:
         license_text = html.escape(license_name)
     credits.append(f'<li><a href="{html.escape(item["source"], quote=True)}" target="_blank" rel="noopener noreferrer">{names[name]}</a><br><small>{html.escape(author)} · {license_text}</small></li>')
 template = template.replace('@@IMAGE_CREDITS@@', '\n'.join(credits))
-assert '@@ASSET:' not in template and '@@IMAGE_CREDITS@@' not in template
+for name in set(re.findall(r'@@FONT:([^@]+)@@', template)):
+    raw = (ROOT / 'assets' / 'fonts' / name).read_bytes()
+    template = template.replace(f'@@FONT:{name}@@', f'data:font/woff2;base64,{base64.b64encode(raw).decode()}')
+font_license = (ROOT / 'assets' / 'fonts' / 'LICENSE.txt').read_text(encoding='utf-8-sig')
+template = template.replace('@@FONT_LICENSE@@', html.escape(font_license))
+assert '@@ASSET:' not in template and '@@IMAGE_CREDITS@@' not in template and '@@FONT:' not in template and '@@FONT_LICENSE@@' not in template
 target = OUT / '电学报告_4人4分钟.html'
 target.write_text(template, encoding='utf-8')
 (OUT / 'index.html').write_text(template, encoding='utf-8')
+(OUT / 'FONT-LICENSE.txt').write_text(font_license, encoding='utf-8')
 (DIST / '.nojekyll').touch()
 
 # Narration is maintained separately from the presentation interface.

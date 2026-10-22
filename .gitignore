@@ -2,6 +2,7 @@
 output/
 work/
 __pycache__/
+assets/fonts/.tools/
 *.py[cod]
 .env
 .env.*

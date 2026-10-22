@@ -6,3 +6,5 @@
 *.cjs text eol=lf
 *.jpg binary
 *.png binary
+*.otf binary
+*.woff2 binary
