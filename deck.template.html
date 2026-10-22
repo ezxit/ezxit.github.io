@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="dark light">
 <link rel="icon" href="data:,">
-<title>伏打与法拉第 · 4人4分钟电学报告</title>
+<title>伏打与法拉第 · 电学报告</title>
 <style>
 :root{--ink:#0b1b23;--cream:#f2eee4;--mint:#a9e4c6;--amber:#e5ba80;--muted:#b2bdc0;--line:rgba(242,238,228,.22);--ui:#091218;--focus:#e5ba80}
 *{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden}body{background:var(--ui);color:var(--cream);font-family:"Microsoft YaHei","PingFang SC","Noto Sans CJK SC",sans-serif;-webkit-font-smoothing:antialiased}button,input{font:inherit}button{cursor:pointer}button,a,input{touch-action:manipulation}button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid var(--focus);outline-offset:4px}button{color:inherit}button:disabled{opacity:.3;cursor:default}button svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex:none}a{color:var(--mint);text-underline-offset:4px}button{transition:background .18s,color .18s,opacity .18s}button:active:not(:disabled){background:#30434c!important}.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}[hidden]{display:none!important}
@@ -28,25 +28,24 @@
 /* 08: conclusion */
 .s8{background:var(--cream);color:var(--ink)}.s8 .slide-top,.s8 .slide-bottom{color:#4e6268}.s8 .slide-body{display:flex;flex-direction:column;justify-content:center}.s8 h2{font-size:65px;margin:8px 0 48px}.s8 .comparison{display:grid;grid-template-columns:1fr 1fr;gap:74px;border-top:1px solid #0b1b2340;border-bottom:1px solid #0b1b2340;padding:30px 0 32px}.s8 .compare-unit+ .compare-unit{border-left:1px solid #0b1b2340;padding-left:74px}.s8 .who{display:flex;align-items:baseline;gap:19px;margin-bottom:16px}.s8 .who strong{font-size:37px}.s8 .year{font-size:42px;color:#61777a}.s8 .formula{font-size:44px;letter-spacing:-.025em;font-weight:600}.s8 .result{font-size:24px;color:#4e6268;margin-top:13px}.s8 .conclusion{font-size:27px;line-height:1.7;margin-top:32px;max-width:1170px}.s8 .part::before{background:#286b57}.s8 .thanks{font-weight:500;letter-spacing:.12em}
 /* Presentation controls */
-.control-bar{min-height:80px;flex:none;padding:15px 28px;display:flex;align-items:center;justify-content:space-between;gap:18px}.speaker-info{min-width:220px;display:flex;align-items:center;gap:13px}.speaker-dot{width:28px;height:28px;border:1px solid #718881;border-radius:50%;display:grid;place-items:center;font:12px Consolas,monospace;color:var(--mint)}.speaker-info strong{display:block;font-size:13px;font-weight:500}.speaker-info small{display:block;color:#a4b4b8;font-size:11px;margin-top:4px;letter-spacing:.035em}.navigation{display:flex;align-items:center;gap:15px}.icon-btn{width:44px;height:44px;border:1px solid #415058;border-radius:50%;display:grid;place-items:center;background:transparent}.icon-btn:hover:not(:disabled){background:#23343d;border-color:#71858c}.page-count{font-family:Consolas,monospace;font-size:14px;letter-spacing:.06em;min-width:66px;text-align:center}.page-count .total{color:#8da2ac}.tools{display:flex;align-items:center;gap:7px}.tool-btn{height:44px;min-width:44px;padding:0 12px;border:0;background:transparent;border-radius:5px;display:flex;align-items:center;gap:7px;font-size:13px;color:#c3cdcf}.tool-btn:hover,.tool-btn[aria-pressed="true"]{background:#23343d;color:var(--cream)}.timer{font-family:Consolas,monospace;font-size:16px;color:var(--mint);font-variant-numeric:tabular-nums;min-width:88px}.timer.over{color:var(--amber)}.timer svg{width:15px;height:15px}.bottom-progress{height:3px;background:#243039;flex:none;position:relative}.bottom-progress span{position:absolute;inset:0 auto 0 0;width:12.5%;background:var(--mint);transition:width .3s}.timing-progress{position:absolute;bottom:0;left:0;width:0;background:var(--amber);height:3px;z-index:2;transition:width .2s linear}
-/* Speaker notes */
-#notes{width:360px;flex:none;background:#14232b;border:1px solid #34444b;border-radius:7px;display:flex;flex-direction:column;min-height:0}#notes .panel-head{padding:18px 18px 12px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #34444b}#notes h2{font-size:16px;letter-spacing:0;font-weight:500}.close-btn{background:none;border:0;min-width:44px;min-height:44px;font-size:24px;color:#c0cecf;border-radius:4px}.close-btn:hover{background:#30434c}.notes-content{overflow:auto;padding:23px 22px;flex:1}.notes-person{font-size:12px;color:var(--mint);letter-spacing:.06em}.notes-title{font-size:23px;line-height:1.45;margin-top:13px;margin-bottom:20px}.notes-script{font-size:17px;line-height:1.95;color:#e2e8e5;white-space:pre-line}.notes-cue{margin-top:24px;border-top:1px solid #425157;padding-top:16px;font-size:13px;line-height:1.8;color:#afc1c5}.notes-footer{padding:16px 20px;border-top:1px solid #34444b;flex:none}.auto-label{display:flex;align-items:center;gap:9px;font-size:13px;line-height:1.5;cursor:pointer}.auto-label input{accent-color:var(--mint);width:18px;height:18px}.notes-footer .quiet-btn{padding:8px 0;text-decoration:underline;text-underline-offset:4px;color:#afc1c5;font-size:12px}.notes-source{margin-top:15px;font-size:12px;line-height:1.8;color:#afc1c5}.notes-source a{color:#bddfcf}.notes-footer .note-help{font-size:11px;color:#a6b9bf;margin:10px 0 0;line-height:1.6}
+.control-bar{min-height:80px;flex:none;padding:15px 28px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:18px}.navigation{grid-column:2;display:flex;align-items:center;gap:15px}.icon-btn{width:44px;height:44px;border:1px solid #415058;border-radius:50%;display:grid;place-items:center;background:transparent}.icon-btn:hover:not(:disabled){background:#23343d;border-color:#71858c}.page-count{font-family:Consolas,monospace;font-size:14px;letter-spacing:0;min-width:66px;text-align:center}.page-count .total{color:#8da2ac}.tools{grid-column:3;justify-self:end;display:flex;align-items:center;gap:7px}.tool-btn{height:44px;min-width:44px;padding:0 12px;border:0;background:transparent;border-radius:5px;display:flex;align-items:center;gap:7px;font-size:13px;color:#c3cdcf}.tool-btn:hover{background:#23343d;color:var(--cream)}.bottom-progress{height:3px;background:#243039;flex:none;position:relative}.bottom-progress span{position:absolute;inset:0 auto 0 0;width:12.5%;background:var(--mint);transition:width .3s}.close-btn{background:none;border:0;min-width:44px;min-height:44px;font-size:24px;color:#c0cecf;border-radius:4px}.close-btn:hover{background:#30434c}
 /* Dialogs */
-dialog{width:min(900px,calc(100% - 32px));max-height:calc(100% - 36px);background:#13242d;color:var(--cream);border:1px solid #53666e;border-radius:12px;padding:0;box-shadow:0 30px 90px #0007}dialog::backdrop{background:#000a;backdrop-filter:blur(6px)}.dialog-head{position:sticky;top:0;background:#13242d;display:flex;align-items:center;justify-content:space-between;padding:17px 25px;border-bottom:1px solid #40525b;z-index:1}.dialog-head h2{font-size:22px;letter-spacing:0}.dialog-body{padding:23px 27px 28px}.dialog-body p{font-size:15px;line-height:1.8;color:#bececf}.overview-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.overview-item{min-height:123px;border:1px solid #40525b;text-align:left;padding:19px 21px;background:#192d36;border-radius:5px}.overview-item:hover,.overview-item[aria-current="page"]{background:#29463f;border-color:var(--mint)}.overview-item small{font-size:12px;color:var(--mint)}.overview-item strong{display:block;font-size:20px;margin:11px 0;line-height:1.4;font-weight:500}.overview-item span{font-size:12px;color:#b9c7c9}.source-list{padding-left:20px;line-height:1.8;font-size:14px}.source-list li{margin:13px 0}.source-list small{color:#afc2c7}.source-heading{font-size:18px;font-weight:500;margin:24px 0 10px}.source-heading:first-child{margin-top:0}.shortcuts{display:grid;grid-template-columns:1fr 1fr;gap:0 40px}.shortcuts div{display:flex;justify-content:space-between;gap:20px;align-items:center;padding:14px 0;border-bottom:1px solid #40525b;font-size:14px}.shortcuts kbd{font-family:Consolas,monospace;background:#283c46;border:1px solid #53666e;padding:4px 8px;border-radius:4px;font-size:12px}.mobile-label{display:none}#toast{position:fixed;left:50%;bottom:108px;transform:translateX(-50%);z-index:10;padding:12px 20px;background:var(--cream);color:var(--ink);border-radius:5px;box-shadow:0 10px 30px #0004;font-size:14px;max-width:calc(100% - 40px);text-align:center}
-body.fullscreen .app-head{display:none}body.fullscreen #workspace{padding:0;gap:0}body.fullscreen .control-bar{position:fixed;bottom:3px;left:0;right:0;z-index:4;background:linear-gradient(transparent,#061015f2 35%);padding-top:30px;transition:opacity .25s}body.fullscreen .bottom-progress{position:fixed;bottom:0;left:0;right:0;z-index:5}body.fullscreen.controls-idle .control-bar{opacity:0;pointer-events:none}body.fullscreen.controls-idle .control-bar:focus-within,body.fullscreen.controls-idle .control-bar:hover{opacity:1;pointer-events:auto}body.fullscreen #notes{z-index:6;border-radius:0}
+dialog{width:min(900px,calc(100% - 32px));max-height:calc(100% - 36px);background:#13242d;color:var(--cream);border:1px solid #53666e;border-radius:12px;padding:0;box-shadow:0 30px 90px #0007}dialog::backdrop{background:#000a;backdrop-filter:blur(6px)}.dialog-head{position:sticky;top:0;background:#13242d;display:flex;align-items:center;justify-content:space-between;padding:17px 25px;border-bottom:1px solid #40525b;z-index:1}.dialog-head h2{font-size:22px;letter-spacing:0}.dialog-body{padding:23px 27px 28px}.dialog-body p{font-size:15px;line-height:1.8;color:#bececf}.source-list{padding-left:20px;line-height:1.8;font-size:14px}.source-list li{margin:13px 0}.source-list small{color:#afc2c7}.source-heading{font-size:18px;font-weight:500;margin:24px 0 10px}.source-heading:first-child{margin-top:0}.shortcuts{display:grid;grid-template-columns:1fr 1fr;gap:0 40px}.shortcuts div{display:flex;justify-content:space-between;gap:20px;align-items:center;padding:14px 0;border-bottom:1px solid #40525b;font-size:14px}.shortcuts kbd{font-family:Consolas,monospace;background:#283c46;border:1px solid #53666e;padding:4px 8px;border-radius:4px;font-size:12px}.mobile-label{display:none}#toast{position:fixed;left:50%;bottom:108px;transform:translateX(-50%);z-index:10;padding:12px 20px;background:var(--cream);color:var(--ink);border-radius:5px;box-shadow:0 10px 30px #0004;font-size:14px;max-width:calc(100% - 40px);text-align:center}
+body.fullscreen .app-head,body.fullscreen .control-bar,body.fullscreen .bottom-progress{display:none!important}body.fullscreen #workspace{padding:0;gap:0}
+html,body{overscroll-behavior-x:none}#viewport{touch-action:pan-y;overscroll-behavior-x:none}
 /* A readable portrait layout, rather than a miniature desktop slide. */
 body.mobile #stage{width:720px;height:1040px}body.mobile .slide{padding:42px 42px 34px}body.mobile .slide-top{font-size:20px}body.mobile .slide-bottom{font-size:19px;line-height:1.6;padding-top:22px;gap:12px;align-items:flex-start}body.mobile .slide-bottom .topic{display:none}body.mobile h1{font-size:87px}body.mobile h2{font-size:61px;line-height:1.25}body.mobile .s1 .slide-body{display:flex;flex-direction:column;gap:50px;align-items:stretch;justify-content:center}body.mobile .s1 h1{margin:16px 0 22px}body.mobile .s1 .years{padding:27px 0 0;border-left:0;border-top:1px solid var(--line);display:flex;align-self:stretch;gap:45px}body.mobile .s1 .years .rule{display:none}body.mobile .s1 .year{font-size:83px}body.mobile .s1 .years p{font-size:25px}body.mobile .s1 .names{font-size:18px}body.mobile .s1 .subtitle{font-size:28px}body.mobile .s1 .eyebrow{font-size:23px}body.mobile .s2 .layout{flex-direction:column;gap:28px;align-items:stretch;justify-content:center;padding-top:28px}body.mobile .s2 .portrait{width:100%;height:286px}body.mobile .s2 .portrait img{object-position:center 28%}body.mobile .s2 .portrait-name{font-size:26px;left:auto;width:360px;padding-left:70px;background:linear-gradient(90deg,transparent,#05131be8);top:0;display:flex;flex-direction:column;justify-content:flex-end}body.mobile .s2 .portrait-name small{font-size:19px}body.mobile .s2 .copy{flex:none}body.mobile .s2 .year{font-size:72px}body.mobile .s2 h2{margin:12px 0 17px}body.mobile .s2 .material{font-size:30px;margin-bottom:15px}body.mobile .s2 .discovery{padding-top:18px;font-size:29px}body.mobile .s3 .layout{flex-direction:column;gap:22px;align-items:stretch;height:auto;padding-top:27px}body.mobile .s3 .copy{width:100%}body.mobile .s3 .energy{font-size:49px;margin-bottom:24px}body.mobile .s3 .steps{gap:13px 16px}body.mobile .s3 .steps p{font-size:27px}body.mobile .s3 .diagram{height:309px}body.mobile .s3 figcaption{font-size:20px;margin-top:10px}body.mobile .s4 .layout{flex-direction:column-reverse;gap:22px;justify-content:center;padding-top:29px}body.mobile .s4 .phone{width:100%;height:275px}body.mobile .s4 .phone img{object-position:50% 57%}body.mobile .s4 .copy{padding-top:0;flex:none}body.mobile .s4 h2{font-size:56px;margin-bottom:22px}body.mobile .s4 .impact{padding:16px 0;gap:14px 18px;font-size:26px;margin:0}body.mobile .s4 .caption{font-size:20px}body.mobile .s5 .layout{flex-direction:column-reverse;gap:25px;align-items:stretch;justify-content:center;padding-top:25px}body.mobile .s5 .portrait{width:100%;height:268px}body.mobile .s5 .portrait img{object-position:center 24%}body.mobile .s5 .portrait figcaption{font-size:26px;left:auto;width:350px;top:0;padding:60px 23px 21px 65px;background:linear-gradient(90deg,transparent,#07131be8);display:flex;flex-direction:column;justify-content:flex-end}body.mobile .s5 .portrait figcaption small{font-size:19px}body.mobile .s5 .year{font-size:69px}body.mobile .s5 h2{font-size:53px;margin:14px 0 23px}body.mobile .s5 .principle{font-size:35px;margin-bottom:18px}body.mobile .s5 .experiment{font-size:27px}body.mobile .s6 .slide-title{font-size:51px}body.mobile .s6 .layout{flex-direction:column;gap:22px;align-items:stretch;justify-content:center;height:auto;padding-top:27px}body.mobile .s6 figure{width:100%}body.mobile .s6 .disk{height:292px}body.mobile .s6 figcaption{font-size:20px}body.mobile .s6 .energy{font-size:46px;margin:10px 0}body.mobile .s6 .copy p{font-size:27px;line-height:1.65}body.mobile .s6 .copy .small{font-size:23px;line-height:1.65;margin-top:14px;padding-top:14px}body.mobile .s7 h2{font-size:68px;margin-bottom:54px}body.mobile .s7 .bg{object-position:67% center}body.mobile .s7::after{background:linear-gradient(90deg,#051017e8,#0510178a),linear-gradient(0deg,#051017db,transparent 65%)}body.mobile .s7 .energy-chain{flex-wrap:wrap;gap:18px;font-size:32px}body.mobile .s7 .application{font-size:29px;margin-top:45px}body.mobile .s7 .source-caption{font-size:18px;max-width:230px;text-align:right}body.mobile .s8 h2{font-size:62px;margin:0 0 38px}body.mobile .s8 .comparison{grid-template-columns:1fr;gap:27px;padding:24px 0 27px}body.mobile .s8 .compare-unit+.compare-unit{border-left:0;border-top:1px solid #0b1b2340;padding:24px 0 0}body.mobile .s8 .who{margin-bottom:12px}body.mobile .s8 .formula{font-size:47px}body.mobile .s8 .result{font-size:27px}body.mobile .s8 .conclusion{font-size:29px;line-height:1.7;margin-top:27px}
-body.mobile .s2 .portrait,body.mobile .s5 .portrait{background:#192b31}body.mobile .s2 .portrait img,body.mobile .s5 .portrait img{width:40%;object-fit:cover;object-position:center top}body.mobile .s2 .portrait-name,body.mobile .s5 .portrait figcaption{width:60%;padding:25px;background:none;justify-content:center}body.mobile .s8 h2{font-size:58px;max-width:590px}body.mobile .speaker-info strong{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:135px}
-@media(max-width:1000px){.app-head{padding:0 20px}.key-hint{display:none}.speaker-info{min-width:170px}.tool-btn{padding:0 9px}.tool-label{display:none}#notes{width:330px}.control-bar{padding:12px 19px;gap:10px}}
-@media(max-width:700px){.app-head{height:49px;padding:0 15px}.app-head strong{font-size:12px}.app-head .head-actions{gap:3px}.app-head .head-rule,.app-head .desktop-only{display:none}#workspace{padding:0 10px;gap:0}.control-bar{min-height:117px;display:grid;grid-template-columns:1fr 1fr;padding:9px 13px;gap:4px 8px}.speaker-info{min-width:0;gap:9px}.speaker-info strong{font-size:12px}.speaker-info small{font-size:10px}.speaker-dot{width:25px;height:25px}.navigation{grid-column:2;grid-row:1;justify-content:flex-end;gap:10px}.tools{grid-column:1 / -1;justify-content:space-between;gap:3px}.timer{min-width:100px}.tool-btn{font-size:12px;padding:0 10px}.tools .tool-label{display:inline}.tools .fullscreen-btn .tool-label{display:none}#notes{position:fixed;inset:0;width:100%;z-index:20;border-radius:0;background:#14232b}.notes-content{padding:23px 25px}.notes-script{font-size:18px}.notes-title{font-size:26px}.notes-footer{padding:12px 24px}.notes-footer .note-help{display:none}.overview-grid{gap:9px}.overview-item{padding:14px 13px;min-height:123px}.overview-item strong{font-size:16px}.overview-item small,.overview-item span{font-size:11px}.dialog-body{padding:20px}.dialog-head{padding:13px 18px}.dialog-head h2{font-size:19px}.shortcuts{grid-template-columns:1fr}.dialog-body .source-list{font-size:13px}body.fullscreen .control-bar{padding:20px 13px 8px}#toast{bottom:140px}.mobile-label{display:inline}}
+body.mobile .s2 .portrait,body.mobile .s5 .portrait{background:#192b31}body.mobile .s2 .portrait img,body.mobile .s5 .portrait img{width:40%;object-fit:cover;object-position:center top}body.mobile .s2 .portrait-name,body.mobile .s5 .portrait figcaption{width:60%;padding:25px;background:none;justify-content:center}body.mobile .s8 h2{font-size:58px;max-width:590px}
+@media(max-width:1000px){.app-head{padding:0 20px}.key-hint{display:none}.tool-btn{padding:0 9px}.tool-label{display:none}.control-bar{padding:12px 19px;gap:10px}}
+@media(max-width:700px){.app-head{height:49px;padding:0 15px}.app-head strong{font-size:12px}.app-head .head-actions{gap:3px}.app-head .head-rule,.app-head .desktop-only{display:none}#workspace{padding:0 10px;gap:0}.control-bar{min-height:66px;padding:9px 13px;gap:6px}.navigation{gap:10px}.tools{gap:0}.tool-btn{padding:0 10px}.tool-label{display:none}.dialog-body{padding:20px}.dialog-head{padding:13px 18px}.dialog-head h2{font-size:19px}.shortcuts{grid-template-columns:1fr}.dialog-body .source-list{font-size:13px}#toast{bottom:85px}.mobile-label{display:inline}}
 @media(max-height:520px) and (min-width:701px){.app-head{height:38px}.control-bar{min-height:62px;padding:8px 18px}}
 @keyframes arrive{from{opacity:.3;transform:translateY(9px)}to{opacity:1;transform:none}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
-@media print{@page{size:15in 8.4375in;margin:0}html,body,#app{height:auto!important;overflow:visible!important;background:var(--ink)!important;display:block!important;print-color-adjust:exact;-webkit-print-color-adjust:exact}.app-head,.control-bar,.bottom-progress,#notes,dialog,#toast{display:none!important}#workspace,#viewport{display:block!important;padding:0!important;overflow:visible!important;height:auto!important}#stage{position:relative!important;width:1440px!important;height:auto!important;transform:none!important;box-shadow:none!important;overflow:visible!important}.slide{position:relative!important;inset:auto!important;display:flex!important;width:1440px!important;height:810px!important;break-after:page;page-break-after:always;animation:none!important}.slide:last-child{break-after:auto}}
+@media print{@page{size:15in 8.4375in;margin:0}html,body,#app{height:auto!important;overflow:visible!important;background:var(--ink)!important;display:block!important;print-color-adjust:exact;-webkit-print-color-adjust:exact}.app-head,.control-bar,.bottom-progress,dialog,#toast{display:none!important}#workspace,#viewport{display:block!important;padding:0!important;overflow:visible!important;height:auto!important}#stage{position:relative!important;width:1440px!important;height:auto!important;transform:none!important;box-shadow:none!important;overflow:visible!important}.slide{position:relative!important;inset:auto!important;display:flex!important;width:1440px!important;height:810px!important;break-after:page;page-break-after:always;animation:none!important}.slide:last-child{break-after:auto}}
 </style>
 </head>
 <body>
 <div id="app">
-  <header class="app-head"><strong>电学 · 物理课堂报告</strong><div class="head-actions"><span class="key-hint">← → 翻页 · N 讲稿 · F 全屏</span><span class="head-rule"></span><button class="quiet-btn desktop-only" id="helpBtn">使用说明</button><button class="quiet-btn" id="sourcesBtn">参考资料</button></div></header>
+  <header class="app-head"><strong>电学 · 物理课堂报告</strong><div class="head-actions"><span class="key-hint">← → 翻页 · F 全屏</span><span class="head-rule"></span><button class="quiet-btn desktop-only" id="helpBtn">使用说明</button><button class="quiet-btn" id="sourcesBtn">参考资料</button></div></header>
   <div id="workspace">
     <main id="viewport" aria-label="幻灯片演示区域">
       <div id="stage">
@@ -56,7 +55,7 @@ body.mobile .s2 .portrait,body.mobile .s5 .portrait{background:#192b31}body.mobi
             <div><div class="eyebrow">伏打与法拉第</div><h1 id="title1">电，怎样<br>走进生活？</h1><p class="subtitle">两位物理学家的发明与影响</p></div>
             <div class="years"><div><div class="year gold">1800</div><p>电堆 · 持续的电流</p><div class="names">Alessandro Volta</div></div><div class="rule"></div><div><div class="year accent">1831</div><p>电磁感应 · 运动发电</p><div class="names">Michael Faraday</div></div></div>
           </div>
-          <div class="slide-bottom"><span class="part">4 位报告者 · 4 分钟</span><span class="topic">化学反应供电 / 机械运动发电</span></div>
+          <div class="slide-bottom"><span class="topic">化学反应供电 / 机械运动发电</span></div>
         </section>
         <section class="slide s2" data-title="伏打的电堆" aria-labelledby="title2" inert>
           <div class="slide-top"><span>伏打 · 发明</span><span class="edition">02 / 08</span></div>
@@ -64,7 +63,7 @@ body.mobile .s2 .portrait,body.mobile .s5 .portrait{background:#192b31}body.mobi
             <figure class="portrait photo"><img src="@@ASSET:volta.jpg@@" alt="意大利物理学家亚历山德罗·伏打的历史肖像"><figcaption class="portrait-name">亚历山德罗·伏打<small>Alessandro Volta · 1745–1827</small></figcaption></figure>
             <div class="copy"><div class="year">1800</div><h2 id="title2">伏打的电堆</h2><p class="material">锌片与铜片交替堆叠，<br>中间夹入浸盐水的布片或纸片。</p><p class="discovery">让实验有了持续的电流来源</p></div>
           </div></div>
-          <div class="slide-bottom"><span class="part">第 1 位 · 开场与伏打的发明</span><span>00:30 - 01:00</span></div>
+          <div class="slide-bottom"></div>
         </section>
         <section class="slide s3" data-title="电堆怎样供电？" aria-labelledby="title3" inert>
           <div class="slide-top"><span>伏打 · 原理</span><span class="edition">03 / 08</span></div>
@@ -72,100 +71,148 @@ body.mobile .s2 .portrait,body.mobile .s5 .portrait{background:#192b31}body.mobi
             <div class="copy"><div class="energy">化学能 → 电能</div><div class="steps"><span>01</span><p>金属与电解液发生化学反应</p><span>02</span><p>接通电路，形成电流</p><span>03</span><p>多层电池串联，提高总电压</p></div></div>
             <figure><div class="diagram paper"><img src="@@ASSET:voltaic-pile.png@@" alt="伏打电堆示意图：铜、锌和浸电解液隔层交替堆叠"></div><figcaption>铜（Copper）、锌（Zinc）与浸盐水的隔层<br>示意图：Borbrav / Luigi Chiesa · CC BY-SA 3.0</figcaption></figure>
           </div></div>
-          <div class="slide-bottom"><span class="part">第 2 位 · 电池原理与生活影响</span><span>01:00 - 01:30</span></div>
+          <div class="slide-bottom"></div>
         </section>
         <section class="slide s4" data-title="电池，让电能随身" aria-labelledby="title4" inert>
           <div class="slide-top"><span>伏打 · 现代影响</span><span class="edition">04 / 08</span></div>
           <div class="slide-body"><div class="layout"><div class="copy"><h2 id="title4">电池，让<span class="accent">电能随身</span></h2><dl class="impact"><dt>研究</dt><dd>持续电流推动电解与电学实验</dd><dt>生活</dt><dd>手电筒、手机和电动车<br>都需要电池供能</dd><dt>发展</dt><dd>现代锂电池是后世<br>众多研究者长期改良的成果</dd></dl></div><figure class="phone photo"><img src="@@ASSET:phone-charging.jpg@@" alt="智能手机放置在充电座上充电的实拍照片"><figcaption class="caption">现代手机充电场景 · LG / CC BY 2.0</figcaption></figure></div></div>
-          <div class="slide-bottom"><span class="part">第 2 位 · 电池原理与生活影响</span><span>01:30 - 02:00</span></div>
+          <div class="slide-bottom"></div>
         </section>
         <section class="slide s5" data-title="法拉第：磁也能生电" aria-labelledby="title5" inert>
           <div class="slide-top"><span>法拉第 · 发现</span><span class="edition">05 / 08</span></div>
           <div class="slide-body"><div class="layout"><div class="copy"><div class="year">1831</div><h2 id="title5">法拉第：磁也能生电</h2><p class="principle">磁通量改变 → 感应电压</p><p class="experiment">把磁铁移入或移出线圈，<br>在闭合电路中可产生感应电流。<br><span class="muted">关键：穿过线圈的磁通量要改变。</span></p></div><figure class="portrait photo"><img src="@@ASSET:faraday.jpg@@" alt="英国物理学家迈克尔·法拉第的历史肖像"><figcaption>迈克尔·法拉第<small>Michael Faraday · 1791–1867</small></figcaption></figure></div></div>
-          <div class="slide-bottom"><span class="part">第 3 位 · 电磁感应与早期发电机</span><span>02:00 - 02:30</span></div>
+          <div class="slide-bottom"></div>
         </section>
         <section class="slide s6" data-title="转动的铜盘，早期的发电机" aria-labelledby="title6" inert>
           <div class="slide-top"><span>法拉第 · 发明</span><span class="edition">06 / 08</span></div>
           <div class="slide-body"><h2 class="slide-title" id="title6">转动的铜盘，早期的发电机</h2><div class="layout"><figure><div class="disk paper"><img src="@@ASSET:faraday-disk.jpg@@" alt="法拉第圆盘发电机历史绘图：铜盘在磁铁两极之间转动"></div><figcaption>法拉第圆盘 · 历史绘图（Émile Alglave，1884）</figcaption></figure><div class="copy"><div class="eyebrow">1831 · 法拉第圆盘</div><div class="energy">机械能<span class="arrow">→</span>电能</div><p>铜盘在磁场中旋转，<br>通过电刷接出直流电。</p><p class="small">这项实验展示了<br>把机械运动转为电能的方法。</p></div></div></div>
-          <div class="slide-bottom"><span class="part">第 3 位 · 电磁感应与早期发电机</span><span>02:30 - 03:00</span></div>
+          <div class="slide-bottom"></div>
         </section>
         <section class="slide s7" data-title="电磁感应与现代发电" aria-labelledby="title7" inert>
           <img class="bg" src="@@ASSET:generator.jpg@@" alt="现代发电厂的蒸汽轮机发电机组，旁边工人展示了设备的巨大尺度">
           <div class="slide-top"><span>法拉第 · 现代影响</span><span class="edition">07 / 08</span></div>
           <div class="slide-body"><h2 id="title7">今天的发电厂，<br>仍用到<span class="accent">电磁感应</span></h2><div class="energy-chain"><span>水流 / 风 / 蒸汽</span><span class="arrow">→</span><span>机械转动</span><span class="arrow">→</span><strong class="accent">电能</strong></div><p class="application">多数大型发电机利用这一原理。<br>变压器也利用电磁感应来调节电压。</p></div>
-          <div class="slide-bottom"><span class="part">第 4 位 · 现代发电与总结</span><span class="source-caption">图：现代蒸汽轮机发电机 · NRC</span></div>
+          <div class="slide-bottom"><span class="source-caption">图：现代蒸汽轮机发电机 · NRC</span></div>
         </section>
         <section class="slide s8" data-title="两项贡献，连接现代生活" aria-labelledby="title8" inert>
           <div class="slide-top"><span>总结 · 两项贡献</span><span class="edition">08 / 08</span></div>
           <div class="slide-body"><h2 id="title8">两项贡献，连接现代生活</h2><div class="comparison"><div class="compare-unit"><div class="who"><strong>伏打</strong><span class="year">1800</span></div><div class="formula">化学能 → 电能</div><p class="result">电堆，为电池技术开路</p></div><div class="compare-unit"><div class="who"><strong>法拉第</strong><span class="year">1831</span></div><div class="formula">机械能 → 电能</div><p class="result">电磁感应，为发电技术奠基</p></div></div><p class="conclusion">口袋里的电池，城市里的电网，<br>都与他们的探索有关。</p></div>
-          <div class="slide-bottom"><span class="part">第 4 位 · 现代发电与总结</span><span class="thanks">谢谢聆听</span></div>
+          <div class="slide-bottom"><span class="thanks">谢谢聆听</span></div>
         </section>
       </div>
     </main>
-    <aside id="notes" aria-label="当前页讲稿" aria-labelledby="notesHeading" hidden>
-      <div class="panel-head"><h2 id="notesHeading">逐页讲稿</h2><button class="close-btn" id="closeNotes" aria-label="关闭讲稿">×</button></div>
-      <div class="notes-content"><div class="notes-person" id="notesPerson"></div><h3 class="notes-title" id="notesTitle"></h3><p class="notes-script" id="notesScript"></p><div class="notes-cue" id="notesCue"></div><div class="notes-source" id="notesSource"></div></div>
-      <div class="notes-footer"><label class="auto-label"><input type="checkbox" id="autoAdvance">计时中每 30 秒自动翻页</label><button class="quiet-btn" id="resetTimer">计时归零并返回第 1 页</button><p class="note-help">每位约 1 分钟。按自然语速练习，可用停顿调节时长。</p></div>
-    </aside>
   </div>
   <footer class="control-bar" aria-label="演示控制">
-    <div class="speaker-info"><div class="speaker-dot" id="speakerNumber">1</div><div><strong id="speakerLabel">第 1 位 · 开场与伏打</strong><small id="speakerTime">本页 00:00 - 00:30</small></div></div>
     <nav class="navigation" aria-label="幻灯片翻页"><button class="icon-btn" id="prev" aria-label="上一页" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg></button><span class="page-count"><span id="pageNow">01</span><span class="total"> / 08</span></span><button class="icon-btn" id="next" aria-label="下一页"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m10 6 6 6-6 6"/></svg></button></nav>
-    <div class="tools"><button class="tool-btn timer" id="timerBtn" aria-label="开始4分钟排练计时" aria-pressed="false" title="开始或暂停排练计时（T）"><svg viewBox="0 0 24 24" aria-hidden="true" id="timerIcon"><path d="m8 5 11 7-11 7z"/></svg><span id="timerValue">04:00</span></button><button class="tool-btn" id="notesBtn" aria-controls="notes" aria-expanded="false" title="显示或隐藏讲稿（N）"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h14v16H5zM9 8h6M9 12h6M9 16h4"/></svg><span class="tool-label">讲稿</span></button><button class="tool-btn" id="overviewBtn" title="全部幻灯片（O）"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h7v7H3zM14 3h7v7h-7zM3 14h7v7H3zM14 14h7v7h-7z"/></svg><span class="tool-label">总览</span></button><button class="tool-btn fullscreen-btn" id="fullBtn" title="进入或退出全屏（F）"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H3v5M16 3h5v5M21 16v5h-5M8 21H3v-5"/></svg><span class="tool-label">全屏</span></button></div>
+    <div class="tools"><button class="tool-btn fullscreen-btn" id="fullBtn" aria-label="进入全屏" title="进入或退出全屏（F）"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H3v5M16 3h5v5M21 16v5h-5M8 21H3v-5"/></svg><span class="tool-label">全屏</span></button></div>
   </footer>
-  <div class="bottom-progress" aria-hidden="true"><span id="slideProgress"></span><div class="timing-progress" id="timingProgress"></div></div>
+  <div class="bottom-progress" aria-hidden="true"><span id="slideProgress"></span></div>
 </div>
-<dialog id="overviewDialog" aria-labelledby="overviewTitle"><div class="dialog-head"><h2 id="overviewTitle">8 页 · 4 人 · 4 分钟</h2><button class="close-btn" data-close="overviewDialog" aria-label="关闭总览">×</button></div><div class="dialog-body"><div class="overview-grid" id="overviewGrid"></div><p style="margin-top:20px">每人连续报告 2 页，每页建议 30 秒。点击任意页即可跳转。</p></div></dialog>
 <dialog id="sourcesDialog" aria-labelledby="sourcesTitle"><div class="dialog-head"><h2 id="sourcesTitle">参考资料与图片来源</h2><button class="close-btn" data-close="sourcesDialog" aria-label="关闭参考资料">×</button></div><div class="dialog-body"><h3 class="source-heading">知识来源</h3><ol class="source-list"><li><a href="https://nationalmaglab.org/magnet-academy/history-of-electricity-magnetism/museum/voltaic-pile-1800/" target="_blank" rel="noopener noreferrer">National MagLab：Voltaic Pile, 1800</a><br><small>伏打电堆的年份、锌铜结构、盐水隔层与持续电流。</small></li><li><a href="https://www.rigb.org/explore-science/explore/collection/alessandro-voltas-voltaic-pile" target="_blank" rel="noopener noreferrer">Royal Institution：Alessandro Volta's voltaic pile</a><br><small>1800 年的电池与馆藏电堆构造。</small></li><li><a href="https://www.rigb.org/explore-science/explore/collection/michael-faradays-generator" target="_blank" rel="noopener noreferrer">Royal Institution：Michael Faraday's generator</a><br><small>1831 年电磁感应、磁铁线圈实验与现代发电。</small></li><li><a href="https://nationalmaglab.org/magnet-academy/history-of-electricity-magnetism/pioneers/michael-faraday/" target="_blank" rel="noopener noreferrer">National MagLab：Michael Faraday</a><br><small>铜盘发电机及后续发电机、变压器的发展。</small></li></ol><h3 class="source-heading">图片署名与许可</h3><ul class="source-list" id="imageCredits">@@IMAGE_CREDITS@@</ul><p>图片以原始内容嵌入；仅通过页面样式裁切或调整显示尺寸。电堆示意图按原许可使用。本演示稿与现代技术的联系指后续发展及原理应用。</p></div></dialog>
-<dialog id="helpDialog" aria-labelledby="helpTitle"><div class="dialog-head"><h2 id="helpTitle">上台前，记住这几个按键</h2><button class="close-btn" data-close="helpDialog" aria-label="关闭说明">×</button></div><div class="dialog-body"><div class="shortcuts"><div><span>下一页 / 上一页</span><kbd>→ / ←</kbd></div><div><span>下一页</span><kbd>空格 / PgDn</kbd></div><div><span>第一页 / 最后一页</span><kbd>Home / End</kbd></div><div><span>打开 / 关闭讲稿</span><kbd>N</kbd></div><div><span>幻灯片总览</span><kbd>O</kbd></div><div><span>进入 / 退出全屏</span><kbd>F</kbd></div><div><span>开始 / 暂停 4 分钟计时</span><kbd>T</kbd></div><div><span>退出弹窗或讲稿</span><kbd>Esc</kbd></div></div><p style="margin-top:23px">建议先打开「讲稿」排练，再进入全屏。计时默认由你开始；如需自动翻页，请在讲稿栏勾选。计时按真实经过时间计算，每位 1 分钟。</p><p style="margin-top:12px">手机上可左右轻扫翻页。所有图片与样式已内嵌，断网也能演示。使用浏览器打印可保存全部 8 页。</p></div></dialog>
+<dialog id="helpDialog" aria-labelledby="helpTitle"><div class="dialog-head"><h2 id="helpTitle">演示按键</h2><button class="close-btn" data-close="helpDialog" aria-label="关闭说明">×</button></div><div class="dialog-body"><div class="shortcuts"><div><span>下一页 / 上一页</span><kbd>→ / ←</kbd></div><div><span>下一页</span><kbd>空格 / PgDn</kbd></div><div><span>第一页 / 最后一页</span><kbd>Home / End</kbd></div><div><span>进入 / 退出全屏</span><kbd>F</kbd></div><div><span>退出全屏或弹窗</span><kbd>Esc</kbd></div></div><p style="margin-top:23px">全屏仅显示幻灯片，使用方向键、空格或手机左右轻扫翻页。</p><p style="margin-top:12px">所有图片与样式已内嵌，断网也能演示。使用浏览器打印可保存全部 8 页。</p></div></dialog>
 <div id="toast" role="status" hidden></div><div class="sr-only" aria-live="polite" id="pageAnnouncement"></div>
 <script>
-const scripts=[
-  {speaker:1,title:'电，怎样走进生活？',text:'大家好，我们介绍两位让电走进生活的物理学家：伏打和法拉第。手机为什么能离开插座使用？城市里的电又从哪里来？答案分别和电池、发电机有关。伏打在一八〇〇年发明电堆，提供持续的电流；法拉第在一八三一年发现电磁感应，展示了运动发电的方法。下面先看伏打的发明。',cue:'约 30 秒翻页，接着介绍伏打电堆。',sources:[0,1]},
-  {speaker:1,title:'伏打的电堆',text:'伏打是意大利物理学家。在他的时代，静电实验虽然会产生火花，却不容易提供持续的电流。伏打把锌片和铜片交替堆叠，中间放入浸盐水的布片或纸片，组成电堆。接通电路后，化学反应就能持续一段时间地供电。这让科学家有了研究电的新工具。接下来，由第二位同学介绍它的原理和影响。',cue:'在 01:00 左右交给第 2 位。',sources:[0,1]},
-  {speaker:2,title:'电堆怎样供电？',text:'电堆把化学能转成电能。两种不同的金属与电解液发生化学反应，使电极之间产生电压。接上导线形成闭合电路，就有电流流动。把多层电池串联，还可以提高总电压。不过，早期电堆会漏液，电流也会逐渐减弱，所以它需要后来不断改良。这里最重要的是：电池通过化学反应供应电能。',cue:'约 01:30 翻页，讲电池与现代生活。',sources:[0]},
-  {speaker:2,title:'电池，让电能随身',text:'伏打电堆的影响有两个方面。第一，它为电解和电学实验提供了持续电流。第二，它开启了电池技术的发展。今天，手电筒、手机和电动车都可以靠电池供能，让我们更方便地携带和使用电能。当然，现代锂电池是后世许多研究者长期改良的成果。说完电池，接下来请第三位同学介绍另一种供电方式：发电机。',cue:'在 02:00 左右交给第 3 位。',sources:[0,1]},
-  {speaker:3,title:'法拉第：磁也能生电',text:'法拉第是英国物理学家。一八三一年，他发现电磁感应。把磁铁移入或移出线圈时，穿过线圈的磁通量会改变，产生感应电压；如果电路接通，就会出现电流，电表指针也会偏转。当磁铁和线圈都停住，磁通量不再变化，电流就不持续。关键是磁通量发生改变，而不只是旁边放了一块磁铁。',cue:'约 02:30 翻页，看运动发电的装置。',sources:[2]},
-  {speaker:3,title:'转动的铜盘，早期的发电机',text:'同一年，法拉第还制作了圆盘发电机。铜盘在磁场中旋转，电刷从铜盘的中心和边缘接出电流。这台装置可以产生直流电，展示了机械能转成电能的方法。它需要外力带动，电能并不是凭空出现的。虽然今天的发电机结构已经发展了很多，但运动发电的探索为后来的电力技术打下了基础。接着请第四位总结。',cue:'在 03:00 左右交给第 4 位。',sources:[3]},
-  {speaker:4,title:'电磁感应与现代发电',text:'法拉第的发现与我们每天的用电密切相关。发电厂利用水流、风，或加热产生的蒸汽，让机组转动，再通过电磁感应产生电能。图中就是现代蒸汽轮机发电机。多数大型发电机采用这一原理，而变压器也利用变化的磁场，升高或降低电压，方便远距离输电和日常用电。它们都是这项发现的后续应用。',cue:'约 03:30 翻到总结页。',sources:[2,3]},
-  {speaker:4,title:'两项贡献，连接现代生活',text:'最后总结两位科学家的贡献。伏打的电堆，用化学反应提供持续电流，为电池技术开路。法拉第发现电磁感应，并制作早期发电机，为后来的发电技术奠定基础。一位联系着口袋里的电池，一位联系着城市里的电网。他们的探索经过后来许多人的发展，成为现代生活的重要部分。我们的报告到这里，谢谢大家。',cue:'在 04:00 左右结束报告。',sources:[0,2,3]}
-];
-const references=[
- ['National MagLab：伏打电堆','https://nationalmaglab.org/magnet-academy/history-of-electricity-magnetism/museum/voltaic-pile-1800/'],
- ['Royal Institution：伏打电堆馆藏','https://www.rigb.org/explore-science/explore/collection/alessandro-voltas-voltaic-pile'],
- ['Royal Institution：法拉第的发电装置','https://www.rigb.org/explore-science/explore/collection/michael-faradays-generator'],
- ['National MagLab：法拉第','https://nationalmaglab.org/magnet-academy/history-of-electricity-magnetism/pioneers/michael-faraday/']
-];
-const people=['开场与伏打','电池原理与生活影响','电磁感应与早期发电机','现代发电与总结'];
 const $=id=>document.getElementById(id), slides=[...document.querySelectorAll('.slide')];
-let current=0, running=false, elapsed=0, startedAt=0, toastTimeout, idleTimeout, notesModal=false;
-const format=s=>{s=Math.max(0,Math.ceil(s));return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')};
-const range=i=>format(i*30)+' - '+format((i+1)*30);
-function syncNotesMode(){const modal=innerWidth<=700&&!$('notes').hidden,wasModal=notesModal;notesModal=modal;document.querySelector('.app-head').inert=modal;$('viewport').inert=modal;document.querySelector('.control-bar').inert=modal;if(modal){$('notes').setAttribute('role','dialog');$('notes').setAttribute('aria-modal','true');if(!wasModal)$('closeNotes').focus()}else{$('notes').removeAttribute('role');$('notes').removeAttribute('aria-modal');if(wasModal)$('notesBtn').focus()}}
-function fit(){const v=$('viewport'),mobile=innerWidth<=700&&innerHeight>innerWidth;document.body.classList.toggle('mobile',mobile);const w=mobile?720:1440,h=mobile?1040:810;const scale=Math.max(.05,Math.min(v.clientWidth/w,v.clientHeight/h));$('stage').style.transform='scale('+scale+')';syncNotesMode()}
-new ResizeObserver(fit).observe($('viewport'));window.addEventListener('resize',fit);
-function goTo(index,updateHash=true,fromTimer=false){index=Number.isInteger(index)?Math.max(0,Math.min(slides.length-1,index)):0;if(!fromTimer&&running&&$('autoAdvance').checked){$('autoAdvance').checked=false;toast('已手动翻页，自动翻页已暂停。')}current=index;slides.forEach((s,i)=>{s.classList.toggle('active',i===index);s.inert=i!==index;s.setAttribute('aria-hidden',i===index?'false':'true')});$('prev').disabled=index===0;$('next').disabled=index===7;$('pageNow').textContent=String(index+1).padStart(2,'0');$('slideProgress').style.width=((index+1)/8*100)+'%';const n=scripts[index];$('speakerNumber').textContent=n.speaker;$('speakerLabel').textContent='第 '+n.speaker+' 位 · '+people[n.speaker-1];$('speakerTime').textContent='本页 '+range(index);$('notesPerson').textContent='第 '+n.speaker+' 位 · '+range(index)+' · 约 30 秒';$('notesTitle').textContent=n.title;$('notesScript').textContent=n.text;$('notesCue').textContent=n.cue;$('notesSource').replaceChildren();const lead=document.createTextNode('本页资料：');$('notesSource').append(lead);n.sources.forEach((r,i)=>{if(i)$('notesSource').append(document.createElement('br'));const a=document.createElement('a');a.href=references[r][1];a.textContent=references[r][0];a.target='_blank';a.rel='noopener noreferrer';$('notesSource').append(a)});$('pageAnnouncement').textContent='第 '+(index+1)+' 页，共 8 页。'+n.title;document.querySelectorAll('.overview-item').forEach((b,i)=>{if(i===index)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current')});if(updateHash){try{history.replaceState(null,'','#'+(index+1))}catch{}}document.title=(index+1)+'/8 '+n.title+' · 4分钟报告';if(!$('notes').hidden)$('notes').querySelector('.notes-content').scrollTop=0;wakeControls()}
-function toggleNotes(force){const show=force===undefined?$('notes').hidden:force,hadFocus=!!document.activeElement?.closest('#notes');$('notes').hidden=!show;$('notesBtn').setAttribute('aria-expanded',String(show));$('notesBtn').setAttribute('aria-pressed',String(show));syncNotesMode();if(!show&&hadFocus)$('notesBtn').focus();requestAnimationFrame(fit);wakeControls()}
-function openDialog(id){const d=$(id);if(!d.open)d.showModal();wakeControls()}
-function toast(message){clearTimeout(toastTimeout);$('toast').textContent=message;$('toast').hidden=false;toastTimeout=setTimeout(()=>$('toast').hidden=true,3200)}
-function getElapsed(){return Math.min(240,elapsed+(running?(performance.now()-startedAt)/1000:0))}
-function paintTimer(){const e=getElapsed();$('timerValue').textContent=format(240-e);$('timingProgress').style.width=(e/240*100)+'%';$('timerBtn').classList.toggle('over',e>=240);if(running&&$('autoAdvance').checked){const target=Math.min(7,Math.floor(e/30));if(target!==current)goTo(target,true,true)}if(running&&e>=240){elapsed=240;running=false;updateTimerButton();toast('4 分钟到，报告结束。')}}
-function updateTimerButton(){$('timerBtn').setAttribute('aria-pressed',String(running));$('timerBtn').setAttribute('aria-label',running?'暂停排练计时':'开始4分钟排练计时');$('timerIcon').innerHTML=running?'<path d="M8 5v14M16 5v14"/>':'<path d="m8 5 11 7-11 7z"/>'}
-function toggleTimer(){if(running){elapsed=getElapsed();running=false}else{if(elapsed>=240){elapsed=0;if($('autoAdvance').checked)goTo(0,true,true)}startedAt=performance.now();running=true;if($('autoAdvance').checked)goTo(Math.floor(elapsed/30),true,true)}updateTimerButton();paintTimer();wakeControls()}
-function resetTimer(){elapsed=0;running=false;updateTimerButton();paintTimer();goTo(0);toast('已归零。点击 04:00 或按 T 开始排练。')}
-setInterval(paintTimer,200);
-async function fullscreen(){try{if(document.fullscreenElement)await document.exitFullscreen();else await document.documentElement.requestFullscreen()}catch{toast('可使用浏览器的全屏菜单，或按 F11。')}}
-function wakeControls(){document.body.classList.remove('controls-idle');clearTimeout(idleTimeout);if(document.fullscreenElement)idleTimeout=setTimeout(()=>{if($('notes').hidden&&!document.querySelector('dialog[open]'))document.body.classList.add('controls-idle')},2600)}
-document.addEventListener('fullscreenchange',()=>{document.body.classList.toggle('fullscreen',!!document.fullscreenElement);$('fullBtn').setAttribute('aria-label',document.fullscreenElement?'退出全屏':'进入全屏');requestAnimationFrame(fit);wakeControls()});document.addEventListener('pointermove',wakeControls,{passive:true});
-$('prev').addEventListener('click',()=>goTo(current-1));$('next').addEventListener('click',()=>goTo(current+1));$('notesBtn').addEventListener('click',()=>toggleNotes());$('closeNotes').addEventListener('click',()=>toggleNotes(false));$('timerBtn').addEventListener('click',toggleTimer);$('resetTimer').addEventListener('click',resetTimer);$('fullBtn').addEventListener('click',fullscreen);$('overviewBtn').addEventListener('click',()=>openDialog('overviewDialog'));$('sourcesBtn').addEventListener('click',()=>openDialog('sourcesDialog'));$('helpBtn').addEventListener('click',()=>openDialog('helpDialog'));
-$('autoAdvance').addEventListener('change',()=>{if(running&&$('autoAdvance').checked)goTo(Math.min(7,Math.floor(getElapsed()/30)),true,true);toast($('autoAdvance').checked?'已开启：计时中每 30 秒自动翻页。':'已切换为手动翻页。')});
-document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',()=>$(b.dataset.close).close()));document.querySelectorAll('dialog').forEach(d=>d.addEventListener('click',e=>{const r=d.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)d.close()}));
-scripts.forEach((s,i)=>{const b=document.createElement('button');b.className='overview-item';const small=document.createElement('small');small.textContent=String(i+1).padStart(2,'0')+' / 08 · 第 '+s.speaker+' 位';const strong=document.createElement('strong');strong.textContent=s.title;const span=document.createElement('span');span.textContent=range(i);b.append(small,strong,span);b.addEventListener('click',()=>{goTo(i);$('overviewDialog').close()});$('overviewGrid').append(b)});
-document.addEventListener('keydown',e=>{if(e.altKey||e.ctrlKey||e.metaKey)return;const dialog=document.querySelector('dialog[open]');if(dialog)return;if(notesModal&&e.key==='Tab'){const els=[...$('notes').querySelectorAll('button,a[href],input')].filter(x=>!x.disabled&&x.getClientRects().length),first=els[0],last=els[els.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}return}if(e.key==='Escape'&&!$('notes').hidden){e.preventDefault();toggleNotes(false);return}if(/INPUT|TEXTAREA|SELECT/.test(e.target.tagName)||e.target.isContentEditable)return;const k=e.key.toLowerCase();if(e.target.tagName==='BUTTON'&&(k===' '||k==='enter'))return;if(['arrowright','arrowdown','pagedown',' '].includes(k)){e.preventDefault();goTo(current+1)}else if(['arrowleft','arrowup','pageup'].includes(k)){e.preventDefault();goTo(current-1)}else if(k==='home'){e.preventDefault();goTo(0)}else if(k==='end'){e.preventDefault();goTo(7)}else if(k==='n'){e.preventDefault();toggleNotes()}else if(k==='o'){e.preventDefault();openDialog('overviewDialog')}else if(k==='t'){e.preventDefault();toggleTimer()}else if(k==='f'){e.preventDefault();fullscreen()}else if(k==='?'){openDialog('helpDialog')}});
-let touchStart=null;$('viewport').addEventListener('touchstart',e=>{if(e.touches.length===1)touchStart={x:e.touches[0].clientX,y:e.touches[0].clientY}},{passive:true});$('viewport').addEventListener('touchend',e=>{if(!touchStart)return;const t=e.changedTouches[0],dx=t.clientX-touchStart.x,dy=t.clientY-touchStart.y;if(Math.abs(dx)>55&&Math.abs(dx)>Math.abs(dy)*1.4)goTo(current+(dx<0?1:-1));touchStart=null},{passive:true});
-window.addEventListener('hashchange',()=>{const n=Number(location.hash.slice(1));if(Number.isInteger(n)&&n>=1&&n<=8)goTo(n-1,false)});
-let restoreMobile=false;window.addEventListener('beforeprint',()=>{restoreMobile=document.body.classList.contains('mobile');document.body.classList.remove('mobile')});window.addEventListener('afterprint',()=>{document.body.classList.toggle('mobile',restoreMobile);fit()});
-goTo(Math.max(0,Math.min(7,(Number(location.hash.slice(1))||1)-1)),false);fit();
+let current=0, toastTimeout;
+function fit(){
+  const viewport=$('viewport'),mobile=innerWidth<=700&&innerHeight>innerWidth;
+  document.body.classList.toggle('mobile',mobile);
+  const width=mobile?720:1440,height=mobile?1040:810;
+  const scale=Math.max(.05,Math.min(viewport.clientWidth/width,viewport.clientHeight/height));
+  $('stage').style.transform='scale('+scale+')';
+}
+new ResizeObserver(fit).observe($('viewport'));
+window.addEventListener('resize',fit);
+function goTo(index,updateHash=true){
+  current=Number.isInteger(index)?Math.max(0,Math.min(slides.length-1,index)):0;
+  slides.forEach((slide,i)=>{
+    slide.classList.toggle('active',i===current);
+    slide.inert=i!==current;
+    slide.setAttribute('aria-hidden',i===current?'false':'true');
+  });
+  $('prev').disabled=current===0;
+  $('next').disabled=current===slides.length-1;
+  $('pageNow').textContent=String(current+1).padStart(2,'0');
+  $('slideProgress').style.width=((current+1)/slides.length*100)+'%';
+  const title=slides[current].dataset.title;
+  $('pageAnnouncement').textContent='第 '+(current+1)+' 页，共 '+slides.length+' 页。'+title;
+  document.title=(current+1)+'/'+slides.length+' '+title+' · 电学报告';
+  if(updateHash){try{history.replaceState(null,'','#'+(current+1))}catch{}}
+}
+function openDialog(id){const dialog=$(id);if(!dialog.open)dialog.showModal()}
+function toast(message){
+  clearTimeout(toastTimeout);
+  $('toast').textContent=message;
+  $('toast').hidden=false;
+  toastTimeout=setTimeout(()=>$('toast').hidden=true,3200);
+}
+async function fullscreen(){
+  try{
+    if(document.fullscreenElement)await document.exitFullscreen();
+    else await document.documentElement.requestFullscreen();
+  }catch{toast('请在浏览器的网站权限中开启全屏。')}
+}
+$('viewport').tabIndex=-1;
+document.addEventListener('fullscreenchange',()=>{
+  const full=!!document.fullscreenElement;
+  document.body.classList.toggle('fullscreen',full);
+  $('fullBtn').setAttribute('aria-label',full?'退出全屏':'进入全屏');
+  if(full){
+    document.querySelectorAll('dialog[open]').forEach(dialog=>dialog.close());
+    $('toast').hidden=true;
+    $('viewport').focus({preventScroll:true});
+  }else $('fullBtn').focus({preventScroll:true});
+  requestAnimationFrame(fit);
+});
+$('prev').addEventListener('click',()=>goTo(current-1));
+$('next').addEventListener('click',()=>goTo(current+1));
+$('fullBtn').addEventListener('click',fullscreen);
+$('sourcesBtn').addEventListener('click',()=>openDialog('sourcesDialog'));
+$('helpBtn').addEventListener('click',()=>openDialog('helpDialog'));
+document.querySelectorAll('[data-close]').forEach(button=>button.addEventListener('click',()=>$(button.dataset.close).close()));
+document.querySelectorAll('dialog').forEach(dialog=>dialog.addEventListener('click',event=>{
+  const rect=dialog.getBoundingClientRect();
+  if(event.clientX<rect.left||event.clientX>rect.right||event.clientY<rect.top||event.clientY>rect.bottom)dialog.close();
+}));
+document.addEventListener('keydown',event=>{
+  if(event.altKey||event.ctrlKey||event.metaKey||document.querySelector('dialog[open]'))return;
+  if(/INPUT|TEXTAREA|SELECT/.test(event.target.tagName)||event.target.isContentEditable)return;
+  const key=event.key.toLowerCase();
+  if(event.target.tagName==='BUTTON'&&(key===' '||key==='enter'))return;
+  if(['arrowright','arrowdown','pagedown',' '].includes(key)){event.preventDefault();goTo(current+1)}
+  else if(['arrowleft','arrowup','pageup'].includes(key)){event.preventDefault();goTo(current-1)}
+  else if(key==='home'){event.preventDefault();goTo(0)}
+  else if(key==='end'){event.preventDefault();goTo(slides.length-1)}
+  else if(key==='f'){event.preventDefault();fullscreen()}
+  else if(key==='escape'&&document.fullscreenElement){event.preventDefault();document.exitFullscreen()}
+  else if(key==='?'&&!document.fullscreenElement)openDialog('helpDialog');
+});
+let touchStart=null;
+$('viewport').addEventListener('touchstart',event=>{
+  if(event.touches.length===1)touchStart={x:event.touches[0].clientX,y:event.touches[0].clientY};
+},{passive:true});
+$('viewport').addEventListener('touchend',event=>{
+  if(!touchStart)return;
+  const touch=event.changedTouches[0],dx=touch.clientX-touchStart.x,dy=touch.clientY-touchStart.y;
+  if(Math.abs(dx)>55&&Math.abs(dx)>Math.abs(dy)*1.4)goTo(current+(dx<0?1:-1));
+  touchStart=null;
+},{passive:true});
+window.addEventListener('hashchange',()=>{
+  const page=Number(location.hash.slice(1));
+  if(Number.isInteger(page)&&page>=1&&page<=slides.length)goTo(page-1,false);
+});
+let restoreMobile=false;
+window.addEventListener('beforeprint',()=>{
+  restoreMobile=document.body.classList.contains('mobile');
+  document.body.classList.remove('mobile');
+});
+window.addEventListener('afterprint',()=>{
+  document.body.classList.toggle('mobile',restoreMobile);
+  fit();
+});
+const initialPage=Number(location.hash.slice(1));
+goTo(Number.isInteger(initialPage)&&initialPage>=1&&initialPage<=slides.length?initialPage-1:0,false);
+fit();
 </script>
 </body>
 </html>

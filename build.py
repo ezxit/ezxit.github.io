@@ -44,27 +44,35 @@ target.write_text(template, encoding='utf-8')
 (OUT / 'index.html').write_text(template, encoding='utf-8')
 (OUT / '.nojekyll').touch()
 
-# The rehearsal sheet uses exactly the scripts embedded in the slide deck.
-original = (ROOT / 'deck.template.html').read_text(encoding='utf-8')
-scripts = re.findall(r"\{speaker:(\d),title:'([^']+)',text:'([^']+)',cue:'([^']+)'", original)
+# Narration is maintained separately from the presentation interface.
+scripts = json.loads((ROOT / 'narration.json').read_text(encoding='utf-8-sig'))
 assert len(scripts) == 8
+assert [item['speaker'] for item in scripts] == [1, 1, 2, 2, 3, 3, 4, 4]
+assert all(isinstance(item['title'], str) and isinstance(item['text'], str) for item in scripts)
 people = ['开场与伏打的发明', '电池原理与生活影响', '电磁感应与早期发电机', '现代发电与总结']
-text = ['# 电学报告：4 人 · 4 分钟', '', '题目：介绍两位电学物理学家的发明，并说明其对现代生活的影响。', '',
-        '人物：亚历山德罗·伏打、迈克尔·法拉第。共 8 页，每人 2 页；每页建议约 30 秒。', '',
-        '## 打开与演示', '', '双击同文件夹内的 HTML 即可在浏览器离线打开。所有图片、样式与脚本已内嵌。', '',
-        '- ← / → 或 PgUp / PgDn：翻页；空格：下一页。',
-        '- N：讲稿；O：总览；F：全屏；T：开始或暂停 4 分钟倒计时。',
-        '- 开始计时前，先返回第 1 页。默认手动翻页。',
-        '- 需要自动翻页时，在讲稿栏勾选“计时中每 30 秒自动翻页”。',
+plain_text = ['电学报告：四人分工与讲稿', '',
+              '题目：介绍两位电学物理学家的发明，并说明其对现代生活的影响。',
+              '人物：亚历山德罗·伏打、迈克尔·法拉第。共 8 页，每人负责 2 页。', '',
+              '报告分工', '']
+text = ['# 电学报告：四人分工与讲稿', '', '题目：介绍两位电学物理学家的发明，并说明其对现代生活的影响。', '',
+        '人物：亚历山德罗·伏打、迈克尔·法拉第。共 8 页，每人负责 2 页。', '',
+        '## 打开与演示', '', '打开同文件夹内的 index.html 即可在浏览器离线演示。所有图片、样式与脚本已内嵌。', '',
+        '- 方向键或 PgUp / PgDn：翻页；空格：下一页。',
+        '- F：进入或退出全屏；Esc：退出全屏。全屏只显示幻灯片内容。',
+        '- 讲稿独立保存在 4人分工与讲稿.txt，支持 Windows 记事本打开。',
         '- 浏览器打印可导出全部 8 页。', '',
-        '## 报告分工', '', '| 报告者 | 页码 | 时间 | 内容 |', '| --- | --- | --- | --- |']
+        '## 报告分工', '', '| 报告者 | 页码 | 内容 |', '| --- | --- | --- |']
 for i, name in enumerate(people):
-    text.append(f'| 第 {i+1} 位 | 第 {i*2+1}、{i*2+2} 页 | {i:02}:00 - {i+1:02}:00 | {name} |')
-text += ['', '## 逐页讲稿', '', '按每分钟约 230–260 字及换页停顿设计；请以实际排练微调语速。计时建议是节奏参考。', '']
-for i, (speaker, title, script, cue) in enumerate(scripts):
-    start = f'{i*30//60:02}:{i*30%60:02}'
-    end = f'{(i+1)*30//60:02}:{(i+1)*30%60:02}'
-    text += [f'### 第 {i+1} 页 · {title}', '', f'第 {speaker} 位 / {start} - {end}', '', script, '', f'提示：{cue}', '']
+    plain_text.append(f'第 {i+1} 位：第 {i*2+1}、{i*2+2} 页；{name}。')
+    text.append(f'| 第 {i+1} 位 | 第 {i*2+1}、{i*2+2} 页 | {name} |')
+plain_text += ['', '逐页讲稿', '']
+text += ['', '## 逐页讲稿', '']
+for i, item in enumerate(scripts):
+    heading = f'第 {i+1} 页：{item["title"]}'
+    speaker = f'报告者：第 {item["speaker"]} 位'
+    plain_text += [heading, speaker, '', item['text'], '']
+    text += [f'### {heading}', '', speaker, '', item['text'], '']
+(OUT / '4人分工与讲稿.txt').write_text('\n'.join(plain_text), encoding='utf-8-sig', newline='\r\n')
 text += ['## 事实与图片资料', '',
          '- National MagLab：伏打电堆（1800）\n  https://nationalmaglab.org/magnet-academy/history-of-electricity-magnetism/museum/voltaic-pile-1800/',
          '- Royal Institution：伏打电堆馆藏\n  https://www.rigb.org/explore-science/explore/collection/alessandro-voltas-voltaic-pile',
@@ -75,5 +83,5 @@ text += ['## 事实与图片资料', '',
 (OUT / '4人分工与讲稿.md').write_text('\n'.join(text), encoding='utf-8')
 counts = []
 for i in range(4):
-    counts.append(sum(len(re.findall(r'[\u4e00-\u9fff]', scripts[j][2])) for j in [2*i, 2*i+1]))
+    counts.append(sum(len(re.findall(r'[\u4e00-\u9fff]', scripts[j]['text'])) for j in [2*i, 2*i+1]))
 print(json.dumps({'html':str(target),'bytes':target.stat().st_size,'slides':len(scripts),'chinese_characters_per_speaker':counts},ensure_ascii=False))

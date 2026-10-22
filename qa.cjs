@@ -1,61 +1,153 @@
 async (page) => {
-  await page.reload();
+  const assert = (condition, message, detail) => {
+    if (!condition) throw new Error(message + (detail ? ': ' + JSON.stringify(detail) : ''));
+  };
   const errors = [];
-  page.on('pageerror', e => errors.push(String(e)));
-  await page.evaluate(() => document.activeElement.blur());
-  const sizes = [[1440,1000,'desktop'],[375,812,'mobile'],[844,390,'landscape']];
+  const onError = error => errors.push(String(error));
+  page.on('pageerror', onError);
   const report = [];
-  for (const [width,height,name] of sizes) {
-    await page.setViewportSize({width,height});
-    for (let i=0;i<8;i++) {
-      await page.evaluate(n=>goTo(n),i);
-      await page.waitForTimeout(100);
-      const data=await page.evaluate(()=>{
-        const s=document.querySelector('.slide.active');
-        const rect=s.getBoundingClientRect();
-        const footer=s.querySelector('.slide-bottom').getBoundingClientRect();
-        const bad=[];
-        for(const e of s.querySelectorAll('h1,h2,p,figure,figcaption,.steps,.year,.comparison,.conclusion,.energy,.impact')) {
-          const r=e.getBoundingClientRect();
-          if(r.width&&r.height&&(r.left<rect.left-1||r.right>rect.right+1||r.top<rect.top-1||r.bottom>rect.bottom+1))bad.push({tag:e.tagName,cls:e.className,text:e.textContent.slice(0,30),rect:{x:r.x,y:r.y,w:r.width,h:r.height}});
-          if(e.closest('.slide-body')&&r.bottom>footer.top+1)bad.push({footerOverlap:e.className||e.tagName,text:e.textContent.slice(0,30)});
-        }
-        return {page:current+1,bad,images:[...s.querySelectorAll('img')].every(x=>x.complete&&x.naturalWidth>0),overflow:document.documentElement.scrollWidth>innerWidth};
-      });
-      report.push({viewport:name,...data});
-      if(name!=='landscape')await page.screenshot({path:`output/playwright/${name}-${i+1}.png`,scale:'css',animations:'disabled'});
+  let phase = 'load';
+  try {
+    await page.reload();
+    await page.waitForFunction(() => typeof goTo === 'function' && document.querySelectorAll('.slide').length === 8);
+    await page.evaluate(async () => {
+      await document.fonts.ready;
+      await Promise.all([...document.images].map(image => image.decode().catch(() => {})));
+      document.activeElement?.blur();
+    });
+    const structure = await page.evaluate(() => {
+      const removed = '#notes,#notesBtn,#closeNotes,#notesHeading,#notesPerson,#notesTitle,#notesScript,#notesCue,#notesSource,#overviewDialog,#overviewBtn,.overview-item,#overviewGrid,#timerBtn,#timerValue,#timerIcon,#timingProgress,.timing-progress,#autoAdvance,#resetTimer,.speaker-info,#speakerTime';
+      const timing = /\b\d{1,2}\s*[:\uff1a]\s*\d{2}\b|\d+\s*(?:\u5206\u949f|\u79d2)|\u5012\u8ba1\u65f6|\u8ba1\u65f6|\u62a5\u544a\u65f6\u957f|\u6f14\u8bb2\u65f6\u957f/;
+      return {
+        removed: [...document.querySelectorAll(removed)].map(node => node.id || node.className),
+        bottomButtons: [...document.querySelectorAll('.control-bar button')].map(button => button.id).sort(),
+        headerButtons: [...document.querySelectorAll('.app-head button')].map(button => button.id).sort(),
+        staleLabels: /\u8bb2\u7a3f|\u603b\u89c8|\u5012\u8ba1\u65f6|\u8ba1\u65f6/.test(document.body.innerText),
+        timedSlides: [...document.querySelectorAll('.slide')].flatMap((slide, index) => timing.test(slide.textContent) ? [index + 1] : []),
+        timedTitle: timing.test(document.title),
+        externalAssets: [...document.images].filter(image => !image.src.startsWith('data:')).length
+      };
+    });
+    assert(structure.removed.length === 0, 'Removed controls or in-page narration remain', structure.removed);
+    assert(JSON.stringify(structure.bottomButtons) === JSON.stringify(['fullBtn', 'next', 'prev']), 'Bottom bar must contain exactly previous, next and fullscreen buttons', structure.bottomButtons);
+    assert(JSON.stringify(structure.headerButtons) === JSON.stringify(['helpBtn', 'sourcesBtn']), 'Header must retain sources and help buttons', structure.headerButtons);
+    assert(!structure.staleLabels && !structure.timedTitle && !structure.timedSlides.length, 'Presentation still exposes narration, overview or report duration', structure);
+    assert(structure.externalAssets === 0, 'Presentation images must work offline', structure.externalAssets);
+
+    for (const [width, height, name] of [[1440, 1000, 'desktop'], [375, 812, 'mobile'], [844, 390, 'landscape']]) {
+      await page.setViewportSize({ width, height });
+      for (let index = 0; index < 8; index++) {
+        phase = `${name} slide ${index + 1}`;
+        await page.evaluate(value => goTo(value), index);
+        await page.evaluate(async () => {
+          await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+          await Promise.all(document.querySelector('.slide.active').getAnimations().map(animation => animation.finished.catch(() => {})));
+        });
+        const result = await page.evaluate(() => {
+          const active = document.querySelector('.slide.active');
+          const bounds = active.getBoundingClientRect();
+          const viewport = document.querySelector('#viewport').getBoundingClientRect();
+          const footer = active.querySelector('.slide-bottom')?.getBoundingClientRect();
+          const bad = [];
+          const visible = node => {
+            if (!node) return false;
+            const style = getComputedStyle(node);
+            const rect = node.getBoundingClientRect();
+            return style.display !== 'none' && style.visibility !== 'hidden' && Number(style.opacity) > 0 && rect.width > 0 && rect.height > 0;
+          };
+          for (const node of active.querySelectorAll('h1,h2,h3,p,figure,figcaption,.steps,.year,.comparison,.conclusion,.energy,.impact,.material,.principle,.experiment,.formula,.result,.label,.eyebrow')) {
+            if (!visible(node)) continue;
+            const rect = node.getBoundingClientRect();
+            const text = node.textContent.trim().slice(0, 45);
+            if (rect.left < bounds.left - 1 || rect.right > bounds.right + 1 || rect.top < bounds.top - 1 || rect.bottom > bounds.bottom + 1) bad.push({ type: 'slideBounds', tag: node.tagName, className: node.className, text });
+            if (footer && node.closest('.slide-body') && rect.bottom > footer.top + 1) bad.push({ type: 'footerOverlap', tag: node.tagName, className: node.className, text });
+            if (node.clientWidth > 0 && node.scrollWidth > node.clientWidth + 2 && !node.matches('figure')) bad.push({ type: 'textOverflow', tag: node.tagName, className: node.className, text });
+          }
+          return {
+            page: current + 1, bad,
+            activeSlides: document.querySelectorAll('.slide.active').length,
+            images: [...active.querySelectorAll('img')].every(image => image.complete && image.naturalWidth > 0),
+            overflow: document.documentElement.scrollWidth > innerWidth + 1 || document.documentElement.scrollHeight > innerHeight + 1,
+            stageFits: bounds.left >= viewport.left - 1 && bounds.right <= viewport.right + 1 && bounds.top >= viewport.top - 1 && bounds.bottom <= viewport.bottom + 1,
+            pageCount: document.querySelector('#pageNow')?.textContent,
+            controlsVisible: ['prev', 'next', 'fullBtn', 'sourcesBtn'].every(id => visible(document.getElementById(id))) && (innerWidth <= 700 || visible(document.getElementById('helpBtn'))),
+            timedTitle: /\d+\s*\u5206\u949f|\u8ba1\u65f6|\u5012\u8ba1\u65f6/.test(document.title)
+          };
+        });
+        report.push({ viewport: name, ...result });
+        assert(result.page === index + 1 && result.activeSlides === 1, 'goTo must activate exactly the requested slide', { viewport: name, index, result });
+        assert(result.images && !result.overflow && result.stageFits && !result.bad.length, 'Slide layout or image regression', { viewport: name, index, result });
+        assert(Number(result.pageCount) === index + 1 && result.controlsVisible && !result.timedTitle, 'Navigation, header or browser title regression', { viewport: name, index, result });
+        await page.screenshot({ path: `output/playwright/${name}-${index + 1}.png`, scale: 'css', animations: 'disabled' });
+      }
     }
+
+    phase = 'keyboard';
+    await page.setViewportSize({ width: 1440, height: 1000 });
+    await page.evaluate(() => { goTo(0); document.activeElement?.blur(); });
+    assert(await page.locator('#prev').isDisabled(), 'Previous button must be disabled on the first slide');
+    await page.locator('#next').click();
+    assert(await page.evaluate(() => current === 1), 'Next button does not advance');
+    await page.keyboard.press('ArrowRight');
+    assert(await page.evaluate(() => current === 2), 'Right arrow does not advance');
+    await page.keyboard.press('ArrowLeft');
+    assert(await page.evaluate(() => current === 1), 'Left arrow does not return');
+    await page.keyboard.press('End');
+    assert(await page.evaluate(() => current === 7) && await page.locator('#next').isDisabled(), 'End key or final-slide boundary is broken');
+    await page.keyboard.press('Home');
+    assert(await page.evaluate(() => current === 0), 'Home key does not return to the cover');
+    await page.locator('#prev').evaluate(button => button.blur());
+    await page.keyboard.press('n');
+    await page.keyboard.press('o');
+    await page.keyboard.press('t');
+    assert(await page.evaluate(() => current === 0 && !document.querySelector('dialog[open]') && !document.querySelector('#notes')), 'Removed shortcuts still trigger a presentation feature');
+
+    phase = 'sources';
+    await page.locator('#sourcesBtn').click();
+    assert(await page.locator('#sourcesDialog').isVisible(), 'Sources dialog does not open');
+    const credits = await page.locator('#imageCredits li').count();
+    assert(credits >= 6, 'Image source credits are incomplete', credits);
+    await page.screenshot({ path: 'output/playwright/sources.png', scale: 'css', animations: 'disabled' });
+    await page.keyboard.press('ArrowRight');
+    assert(await page.evaluate(() => current === 0), 'Arrow keys must not change slides while a dialog is open');
+    await page.keyboard.press('Escape');
+    assert(!await page.locator('#sourcesDialog').isVisible(), 'Escape does not close sources');
+    phase = 'help';
+    await page.locator('#helpBtn').click();
+    assert(await page.locator('#helpDialog').isVisible(), 'Help dialog does not open');
+    const help = await page.locator('#helpDialog').innerText();
+    assert(!/\u8bb2\u7a3f|\u603b\u89c8|\u8ba1\u65f6|\u5012\u8ba1\u65f6|\d+\s*(?:\u5206\u949f|\u79d2)/.test(help), 'Help still documents removed features', help);
+    await page.keyboard.press('Escape');
+
+    phase = 'swipe';
+    await page.setViewportSize({ width: 375, height: 812 });
+    await page.evaluate(() => goTo(2));
+    const touch = await page.context().newCDPSession(page);
+    try {
+      for (const [start, end, expected] of [[300, 70, 3], [70, 300, 2]]) {
+        await touch.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ x: start, y: 350 }] });
+        await touch.send('Input.dispatchTouchEvent', { type: 'touchMove', touchPoints: [{ x: end, y: 350 }] });
+        await touch.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
+        assert(await page.evaluate(value => current === value, expected), 'Horizontal touch swipe does not navigate', { start, end, expected });
+      }
+    } finally {
+      await touch.detach();
+    }
+
+    phase = 'reduced motion';
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    const reduced = await page.evaluate(() => getComputedStyle(document.querySelector('.slide.active')).animationName === 'none');
+    assert(reduced, 'Reduced-motion preference is not respected');
+    await page.emulateMedia({ reducedMotion: 'no-preference' });
+    await page.setViewportSize({ width: 1440, height: 1000 });
+    await page.evaluate(() => goTo(0));
+    assert(errors.length === 0, 'Browser runtime errors', errors);
+    const result = { report, errors, structure, credits, keyboard: true, swipe: true, sources: true, help: true, reduced };
+    await page.evaluate(value => { window.qaReport = value; }, result);
+    return result;
+  } catch (error) {
+    throw new Error(`${phase} at ${page.url()}: ${error.message}`);
+  } finally {
+    page.off('pageerror', onError);
   }
-  await page.setViewportSize({width:1440,height:1000});
-  await page.evaluate(()=>goTo(0));
-  await page.keyboard.press('ArrowRight');
-  const keyboard=await page.evaluate(()=>current===1);
-  await page.getByRole('button',{name:'讲稿',exact:true}).click();
-  const notes=await page.locator('#notes').isVisible();
-  await page.screenshot({path:'output/playwright/notes.png',scale:'css',animations:'disabled'});
-  await page.getByRole('button',{name:'关闭讲稿'}).click();
-  await page.getByRole('button',{name:'总览',exact:true}).click();
-  await page.locator('.overview-item').nth(5).click();
-  const overview=await page.evaluate(()=>current===5&&!document.querySelector('#overviewDialog').open);
-  await page.evaluate(()=>resetTimer());
-  await page.getByRole('button',{name:'开始4分钟排练计时'}).click();
-  await page.waitForTimeout(1100);
-  const ticking=await page.evaluate(()=>getElapsed()>1&&running);
-  await page.getByRole('button',{name:'暂停排练计时'}).click();
-  const paused=await page.evaluate(()=>!running&&elapsed>1);
-  const auto=await page.evaluate(()=>{
-    $('autoAdvance').checked=true;elapsed=30;startedAt=performance.now();running=true;paintTimer();const advance=current===1;
-    elapsed=240;startedAt=performance.now();paintTimer();const finish=current===7&&!running&&$('timerValue').textContent==='00:00';
-    $('autoAdvance').checked=false;resetTimer();return {advance,finish};
-  });
-  await page.getByRole('button',{name:'参考资料',exact:true}).click();
-  const sources=await page.locator('#sourcesDialog').isVisible()&&await page.locator('#imageCredits li').count()===6;
-  await page.keyboard.press('Escape');
-  await page.emulateMedia({reducedMotion:'reduce'});
-  const reduced=await page.evaluate(()=>getComputedStyle(document.querySelector('.slide.active')).animationName==='none');
-  await page.emulateMedia({reducedMotion:'no-preference'});
-  const externalAssets=await page.evaluate(()=>[...document.querySelectorAll('img')].filter(x=>!x.src.startsWith('data:')).length);
-  await page.evaluate(()=>goTo(0));
-  await page.evaluate(r=>window.qaReport=r,{report,errors,keyboard,notes,overview,ticking,paused,auto,sources,reduced,externalAssets});
-  return {report,errors,keyboard,notes,overview,ticking,paused,auto,sources,reduced,externalAssets};
 }
